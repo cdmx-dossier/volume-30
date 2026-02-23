@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimi's 30th Birthday</title>
+   
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌶️</text></svg>">
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet">
+   
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+   
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neutral: {
+                            100: '#EDEBDE',
+                            200: '#E9D6C7',
+                            300: '#E6E0D0',
+                        },
+                        ink: {
+                            900: '#150C0C',
+                            800: '#363936',
+                        },
+                        brand: {
+                            900: '#200100',
+                            800: '#630100',
+                            700: '#800100',
+                        },
+                        highlight: {
+                            300: '#CBB6A7',
+                            400: '#B18177',
+                            500: '#AE856A',
+                        }
+                    },
+                    fontFamily: {
+                        forum: ['Forum', 'serif'],
+                        mulish: ['Mulish', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'pressed': 'inset 2px 2px 5px rgba(21, 12, 12, 0.5), 2px 2px 10px rgba(0,0,0,0.5)',
+                        'book': '15px 15px 30px rgba(0,0,0,0.8), -5px 5px 15px rgba(0,0,0,0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #150C0C;
+            --text-color: #E9D6C7;
+            --surface-color: #363936;
+            --accent-color: #AE856A;
+            --theme-label-color: #AE856A;
+        }
+
+        /* --- COMPONENT 4 THEMES --- */
+        .theme-sweet {
+            --bg-color: #E9D6C7;
+            --surface-color: #AE856A;
+            --accent-color: #693B2D;
+            --text-color: #150C0C;
+            --theme-label-color: #150C0C; 
+        }
+        .theme-spice {
+            --bg-color: #200100;
+            --surface-color: #630100;
+            --accent-color: #800100;
+            --text-color: #EDEBDE;
+            --theme-label-color: #150C0C; 
+        }
+        .theme-everything-nice {
+            --bg-color: #E6E0D0;
+            --surface-color: #CBB6A7;
+            --accent-color: #B18177;
+            --text-color: #363936;
+            --theme-label-color: #363936; 
+        }
+
+        /* Smooth transitioning */
+        body, .ephemera-box, button, h1, h2, h3, p, div:not(.static-paper):not(#menu-cover), svg path {
+            transition: background-color 3s ease-in-out, color 3s ease-in-out, border-color 3s ease-in-out, fill 3s ease-in-out;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .texture-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+            z-index: 50;
+        }
+
+       .candle-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 35vh;
+            max-height: 300px; 
+            min-height: 150px; 
+            filter: drop-shadow(0px 20px 20px rgba(0,0,0,0.8));
+        }
+
+        .candle-flame {
+            width: 22px;
+            height: 55px;
+            flex-shrink: 0; 
+            background: radial-gradient(ellipse at 50% 80%, #ffffff 10%, #ffe266 30%, #f47d20 60%, transparent 90%);
+            border-radius: 50% 50% 20% 20% / 60% 60% 30% 30%;
+            animation: slow-flicker 1.5s infinite alternate ease-in-out;
+            margin-bottom: -5px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .candle-wick {
+            width: 3px;
+            height: 12px;
+            flex-shrink: 0; 
+            background: linear-gradient(to bottom, #111, #3a1c0b);
+            border-radius: 2px 2px 0 0;
+            margin-bottom: -3px;
+            z-index: 5;
+            position: relative;
+        }
+
+      .candle-body {
+            width: 50px;
+            height: 100%; 
+            background: linear-gradient(to right, #1f100c 0%, #593522 25%, #7a4b31 50%, #593522 75%, #1f100c 100%);
+            border-left: 1px solid rgba(0,0,0,0.5);
+            border-right: 1px solid rgba(0,0,0,0.5);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .candle-body::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -1px;
+            width: calc(100% + 2px);
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, #8f5a3a 0%, #593522 50%, #2f1b11 100%);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.7), 0 1px 2px rgba(255,255,255,0.05);
+            z-index: 1;
+        }
+
+        .candle-body::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 6px;
+            height: 40px;
+            background: #6e4228;
+            border-radius: 4px 4px 5px 5px;
+            box-shadow: 1px 2px 4px rgba(0,0,0,0.6), inset -1px -1px 2px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        @keyframes slow-flicker {
+            0% { transform: scale(1) rotate(-1deg); opacity: 0.85; box-shadow: 0 -5px 25px rgba(255, 100, 0, 0.4), 0 10px 40px rgba(255, 200, 50, 0.4); }
+            25% { transform: scale(1.02) rotate(1deg); opacity: 0.95; }
+            50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.9; box-shadow: 0 -8px 30px rgba(255, 120, 0, 0.5), 0 12px 50px rgba(255, 220, 50, 0.5); }
+            75% { transform: scale(1.01) rotate(0.5deg); opacity: 1; }
+            100% { transform: scale(0.99) rotate(-1.5deg); opacity: 0.85; box-shadow: 0 -4px 20px rgba(255, 90, 0, 0.3), 0 8px 30px rgba(255, 190, 50, 0.4); }
+        }
+
+        .ephemera-box {
+            background-color: var(--surface-color);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(174, 133, 106, 0.2);
+        }
+
+        .static-paper {
+            background-color: #EDEBDE;
+            color: #150C0C;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .ephemera-box::before, .static-paper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .no-select {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-700 selection:text-neutral-100">
+
+    <div class="texture-overlay">
+        <svg width="100%" height="100%">
+            <filter id="global-noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="4" result="noise" />
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#global-noise)" />
+        </svg>
+    </div>
+
+    <main class="min-h-[100dvh] w-full max-w-md mx-auto overflow-hidden relative shadow-2xl bg-[var(--bg-color)] flex flex-col items-center">
+
+        <div id="phase1" class="flex flex-col justify-between items-center py-8 px-6 z-10 w-full h-[100dvh] absolute inset-0 transition-opacity duration-1000">
+            <div class="text-center mt-4 w-full">
+                <h1 class="font-forum text-3xl sm:text-4xl tracking-widest text-[var(--accent-color)] leading-tight">NIMI'S 30TH<br>BIRTHDAY</h1>
+                <p class="font-mulish text-xs tracking-widest uppercase mt-4 opacity-60">Mexico City</p>
+            </div>
+
+            <div class="w-full flex-1 flex items-center justify-center relative -mt-4 mb-6">
+                <div class="candle-wrapper">
+                    <div id="candle-flame" class="candle-flame"></div>
+                    <div id="candle-wick" class="candle-wick"></div>
+                    <div id="candle-body" class="candle-body"></div>
+                </div>
+            </div>
+
+            <div class="w-full flex flex-col items-center space-y-6">
+                <div class="text-center font-forum text-sm tracking-widest opacity-80 mb-2">
+                    THEME REVEAL
+                </div>
+
+                <div class="flex gap-4 justify-center" id="countdown-container">
+                    <div class="flex flex-col items-center">
+                        <div class="ephemera-box rounded-md w-[4.5rem] h-[4.5rem] flex items-center justify-center shadow-lg">
+                            <span id="t-days" class="font-forum text-3xl">00</span>
+                        </div>
+                        <span class="font-mulish text-[10px] uppercase tracking-widest mt-3 opacity-70">Days</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="ephemera-box rounded-md w-[4.5rem] h-[4.5rem] flex items-center justify-center shadow-lg">
+                            <span id="t-hours" class="font-forum text-3xl">00</span>
+                        </div>
+                        <span class="font-mulish text-[10px] uppercase tracking-widest mt-3 opacity-70">Hours</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="ephemera-box rounded-md w-[4.5rem] h-[4.5rem] flex items-center justify-center shadow-lg">
+                            <span id="t-mins" class="font-forum text-3xl">00</span>
+                        </div>
+                        <span class="font-mulish text-[10px] uppercase tracking-widest mt-3 opacity-70">Minutes</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="ephemera-box rounded-md w-[4.5rem] h-[4.5rem] flex items-center justify-center shadow-lg">
+                            <span id="t-secs" class="font-forum text-3xl">00</span>
+                        </div>
+                        <span class="font-mulish text-[10px] uppercase tracking-widest mt-3 opacity-70">Seconds</span>
+                    </div>
+                </div>
+
+                <div class="w-full pt-2 flex flex-col items-center">
+                    <a href="http://partiful.com/e/MH2kkaylYCq5fbQ5vrVd" target="_blank" rel="noopener noreferrer" class="block w-full">
+                        <button class="w-full py-5 flex items-center justify-center rounded-md border border-[var(--text-color)] bg-[var(--text-color)] text-[var(--bg-color)] font-mulish text-sm uppercase tracking-[0.2em] transition-all hover:bg-transparent hover:text-[var(--text-color)] shadow-lg ephemera-box">
+                            Secure Your Spot by March 1
+                        </button>
+                    </a>
+                    <div class="font-mulish text-[10px] tracking-[0.3em] uppercase opacity-40 mt-6 mb-2">
+                        Est. 1996
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="phase2" class="hidden absolute inset-0 w-full h-full z-20">
+           
+            <svg id="host-stand" class="absolute inset-0 w-full h-full opacity-0" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <filter id="leather-texture">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise" />
+                        <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" result="blend" />
+                        <feComposite in="blend" in2="SourceGraphic" operator="in" />
+                    </filter>
+                    <filter id="paper-texture">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise" />
+                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.15 0" in="noise" result="coloredNoise" />
+                        <feBlend in="SourceGraphic" in2="coloredNoise" mode="darken" result="blend" />
+                        <feComposite in="blend" in2="SourceGraphic" operator="in" />
+                    </filter>
+                    <filter id="item-shadow" x="-20%" y="-20%" width="150%" height="150%">
+                        <feDropShadow dx="3" dy="8" stdDeviation="5" flood-color="#000" flood-opacity="0.8"/>
+                    </filter>
+                    <filter id="soft-shadow" x="-20%" y="-20%" width="150%" height="150%">
+                        <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.5"/>
+                    </filter>
+                    <filter id="rust-texture">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
+                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" in="noise" result="coloredNoise" />
+                        <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" result="blend" />
+                        <feComposite in="blend" in2="SourceGraphic" operator="in" />
+                    </filter>
+                    <filter id="ragged-edge">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G" />
+                    </filter>
+                </defs>
+               
+                <rect width="400" height="800" fill="#0c0705" />
+                <rect width="400" height="800" fill="#1c0f0a" opacity="0.4" filter="url(#leather-texture)" />
+
+                <g id="bar-menu" transform="translate(60, 200)" filter="url(#item-shadow)">
+                    <rect width="220" height="350" rx="6" fill="#3D0C11" filter="url(#leather-texture)" />
+                    <rect x="8" y="8" width="204" height="334" rx="4" fill="none" stroke="#5A1E23" stroke-width="1.5" stroke-dasharray="4 4" />
+                    <path d="M 0 30 L 0 0 L 30 0" fill="none" stroke="#5A1E23" stroke-width="3" />
+                    <path d="M 220 30 L 220 0 L 190 0" fill="none" stroke="#5A1E23" stroke-width="3" />
+                    <path d="M 0 320 L 0 350 L 30 350" fill="none" stroke="#5A1E23" stroke-width="3" />
+                    <path d="M 220 320 L 220 350 L 190 350" fill="none" stroke="#5A1E23" stroke-width="3" />
+                   
+                    <image href="https://via.placeholder.com/100x100/3D0C11/E9D6C7?text=BAR+MENU" x="60" y="40" width="100" height="100" />
+                </g>
+               
+                <g id="cocktail-napkin" transform="translate(130, 160) rotate(-12)" filter="url(#soft-shadow)">
+                 <mask id="burn-mask">
+                        <rect width="300" height="300" x="-50" y="-50" fill="white" />
+                       
+                        <rect id="burn-hole-mask" x="-400" y="150" width="1000" height="1200" fill="black" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" />
+                    </mask>
+
+                    <g id="napkin-paper" mask="url(#burn-mask)">
+                        <rect width="140" height="140" fill="#EDEBDE" filter="url(#paper-texture)" />
+                        <rect x="6" y="6" width="128" height="128" fill="none" stroke="#800100" stroke-width="1.5" />
+                        <rect x="10" y="10" width="120" height="120" fill="none" stroke="#800100" stroke-width="0.5" />
+                        <image href="https://via.placeholder.com/30/EDEBDE/800100?text=LOGO" x="96" y="96" width="30" height="30" />
+                    </g>
+
+                    <line id="burn-edge-ring" x1="-400" y1="150" x2="600" y2="150" stroke="#3A2318" stroke-width="14" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0" />
+                    <line id="burn-edge-inner" x1="-400" y1="150" x2="600" y2="150" stroke="#f47d20" stroke-width="4" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0" />
+                </g>
+
+                <g id="matchbox" transform="translate(60, 600) rotate(8)" filter="url(#soft-shadow)">
+                    <rect width="60" height="90" fill="#E9D6C7" filter="url(#paper-texture)" />
+                   
+                    <path d="M 60 0 L 70 6 L 70 96 L 60 90 Z" fill="#CBB6A7" />
+                    <path d="M 60 10 L 70 16 L 70 86 L 60 80 Z" fill="#363936" />
+                    <path d="M 60 15 L 70 21 M 60 25 L 70 31 M 60 35 L 70 41 M 60 45 L 70 51 M 60 55 L 70 61 M 60 65 L 70 71 M 60 75 L 70 81" stroke="#150C0C" stroke-width="1" />
+                   
+                    <rect x="4" y="4" width="52" height="82" fill="none" stroke="#2b4b6f" stroke-width="2" />
+                    <text x="8" y="16" font-family="Mulish" font-weight="bold" font-size="10" fill="#150C0C">30</text>
+                    <path d="M 25 30 Q 15 42 30 65 Q 45 45 45 32 Q 38 25 25 30 Z" fill="#b01010" />
+                    <path d="M 30 27 Q 28 19 32 15" fill="none" stroke="#2d5a27" stroke-width="3" stroke-linecap="round" />
+                    <text x="30" y="82" font-family="Forum" font-size="9" font-weight="bold" fill="#150C0C" text-anchor="middle" letter-spacing="1">EL CHILE</text>
+                </g>
+
+                <g id="single-match-wrapper" class="cursor-pointer">
+                    <g id="single-match" filter="url(#soft-shadow)">
+                        <path d="M 148 628 L 120 680" stroke="#d1b894" stroke-width="4" stroke-linecap="round" />
+                        <circle cx="148" cy="628" r="4" fill="#800100" />
+                        <circle cx="149" cy="627" r="2" fill="#a81515" />
+                    </g>
+                   
+                    <g id="match-flame">
+                        <foreignObject x="137" y="573" width="22" height="55">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="candle-flame" style="margin: 0; filter: drop-shadow(0 0 10px rgba(244,125,32,0.6));"></div>
+                        </foreignObject>
+                    </g>
+                </g>
+            </svg>
+
+            <svg id="speakeasy-door" class="absolute inset-0 w-full h-full z-20 pointer-events-none" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="wood-base" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#3A2318" />
+                        <stop offset="20%" stop-color="#4B2E21" />
+                        <stop offset="80%" stop-color="#3A2318" />
+                        <stop offset="100%" stop-color="#21120B" />
+                    </linearGradient>
+
+                    <linearGradient id="rusty-iron" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6e4228" />
+                        <stop offset="30%" stop-color="#4a2e1b" />
+                        <stop offset="70%" stop-color="#5c3822" />
+                        <stop offset="100%" stop-color="#2a1810" />
+                    </linearGradient>
+                    <radialGradient id="rusty-highlight" cx="30%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#8c5838" />
+                        <stop offset="50%" stop-color="#54321d" />
+                        <stop offset="100%" stop-color="#1a0f0a" />
+                    </radialGradient>
+                   
+                    <filter id="contact-shadow" x="-20%" y="-20%" width="150%" height="150%">
+                        <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.9"/>
+                    </filter>
+                    <filter id="door-shadow" x="-20%" y="-20%" width="150%" height="150%">
+                        <feDropShadow dx="5" dy="0" stdDeviation="8" flood-color="#000000" flood-opacity="1"/>
+                    </filter>
+                </defs>
+
+                <g class="pointer-events-auto">
+                    <g id="door-left" filter="url(#door-shadow)">
+                        <path d="M -50 900 L -50 250 C -50 150 50 50 200 50 L 200 900 Z" fill="url(#wood-base)" stroke="#1a0f0a" stroke-width="4" />
+                        <path d="M 20 250 C 20 180 80 120 180 120 L 180 350 L 20 350 Z" fill="none" stroke="#21120B" stroke-width="6" />
+                        <rect x="20" y="380" width="160" height="400" fill="none" stroke="#21120B" stroke-width="6" />
+                        <line x1="200" y1="50" x2="200" y2="900" stroke="#000" stroke-width="4" />
+                    </g>
+
+                    <g id="door-right" filter="url(#door-shadow)">
+                        <path d="M 450 900 L 450 250 C 450 150 350 50 200 50 L 200 900 Z" fill="url(#wood-base)" stroke="#1a0f0a" stroke-width="4" />
+                        <path d="M 380 250 C 380 180 320 120 220 120 L 220 350 L 380 350 Z" fill="none" stroke="#21120B" stroke-width="6" />
+                        <rect x="220" y="380" width="160" height="400" fill="none" stroke="#21120B" stroke-width="6" />
+                    </g>
+
+                    <g id="knocker-wrapper" transform="translate(200, 380)" class="no-select cursor-pointer">
+                        <g filter="url(#contact-shadow)">
+                            <path d="M 0 -75 L 10 -85 L 20 -70 L 35 -75 L 40 -60 L 55 -55 L 55 -40 L 70 -30 L 65 -15 L 75 0 L 65 15 L 70 30 L 55 40 L 55 55 L 40 60 L 35 75 L 20 70 L 10 85 L 0 75 L -10 85 L -20 70 L -35 75 L -40 60 L -55 55 L -55 40 L -70 30 L -65 15 L -75 0 L -65 -15 L -70 -30 L -55 -40 L -55 -55 L -40 -60 L -35 -75 L -20 -70 L -10 -85 Z" fill="url(#rusty-iron)" filter="url(#rust-texture)" />
+                            <circle cx="0" cy="0" r="50" fill="none" stroke="#2a1810" stroke-width="4" />
+                            <circle cx="0" cy="0" r="45" fill="none" stroke="url(#rusty-highlight)" stroke-width="2" filter="url(#rust-texture)" />
+                            <path d="M 0 -40 Q 5 -10 0 0 Q -5 -10 0 -40 Z" fill="#21120B" />
+                            <path d="M 0 40 Q 5 10 0 0 Q -5 10 0 40 Z" fill="#21120B" />
+                            <path d="M -40 0 Q -10 5 0 0 Q -10 -5 -40 0 Z" fill="#21120B" />
+                            <path d="M 40 0 Q 10 5 0 0 Q 10 -5 40 0 Z" fill="#21120B" />
+                            <path d="M -28 -28 Q -5 -5 0 0 Q -10 0 -28 -28 Z" fill="#21120B" />
+                            <path d="M 28 28 Q 5 5 0 0 Q 10 0 28 28 Z" fill="#21120B" />
+                            <path d="M 28 -28 Q 5 -5 0 0 Q 0 -10 28 -28 Z" fill="#21120B" />
+                            <path d="M -28 28 Q -5 5 0 0 Q 0 10 -28 28 Z" fill="#21120B" />
+                        </g>
+
+                        <rect x="-15" y="-20" width="30" height="20" fill="url(#rusty-highlight)" filter="url(#contact-shadow)" />
+                        <rect x="-15" y="-20" width="30" height="20" fill="none" stroke="#2a1810" stroke-width="2" />
+
+                        <g id="knocker-ring" filter="url(#contact-shadow)">
+                            <path d="M -10 -10
+                                         C -40 -10 -50 20 -60 50
+                                         C -70 80 -40 100 0 100
+                                         C 40 100 70 80 60 50
+                                         C 50 20 40 -10 10 -10"
+                                  fill="none" stroke="url(#rusty-iron)" stroke-width="16" stroke-linecap="round" filter="url(#rust-texture)" />
+                            <path d="M -10 -10
+                                         C -40 -10 -50 20 -60 50
+                                         C -70 80 -40 100 0 100
+                                         C 40 100 70 80 60 50
+                                         C 50 20 40 -10 10 -10"
+                                  fill="none" stroke="url(#rusty-highlight)" stroke-width="6" stroke-linecap="round" filter="url(#rust-texture)" opacity="0.8" />
+                            <path d="M -15 90 Q 0 80 15 90" fill="none" stroke="url(#rusty-highlight)" stroke-width="8" stroke-linecap="round" filter="url(#rust-texture)"/>
+                            <rect x="-8" y="75" width="16" height="10" fill="url(#rusty-iron)" />
+                        </g>
+
+                        <path d="M -10 105 L 10 105 L 15 125 L -15 125 Z" fill="url(#rusty-iron)" filter="url(#contact-shadow)" />
+                        <path d="M -10 105 L 10 105 L 15 125 L -15 125 Z" fill="none" stroke="url(#rusty-highlight)" stroke-width="1.5" />
+                    </g>
+                </g>
+            </svg>
+           
+            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-700">
+                <div class="ephemera-box p-6 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">
+                    <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">THE SPICE OF LIFE</h2>
+                    <div class="font-mulish text-sm mb-6 space-y-4 opacity-90 leading-relaxed text-[var(--text-color)]">
+                        <p>“This year I’m basically trying to capture the essence of the perfect ‘cloud 9’ moment. It’s elevated from ordinary life, but it’s also fleeting, so it’s that much more important to appreciate it while it’s here. That’s how I’ve felt about my birthday the past few years - getting to bring all my favorite people together and curate an experience for them. So I figured, why not make that the theme?</p>
+                        <p>Here’s what to expect:</p>
+                        <ul class="list-disc pl-4 space-y-2">
+                            <li><strong class="text-[var(--theme-label-color)]">Al Fresco:</strong> There’s a sizzle in the air during a Chicago summer - we’re going to tap into that. Expect to be in environments where we can bask in the sunshine, feel the breeze, and let loose.</li>
+                            <li><strong class="text-[var(--theme-label-color)]">Rejuvenating:</strong> Though I expect this weekend to be a lot of fun, it won’t be at a live-fast-die-young, burned too bright, breakneck pace. It’s a time to treat yourself to an indulgent, but laid back weekend.</li>
+                            <li><strong class="text-[var(--theme-label-color)]">Soulful:</strong> During the weekend’s schedule, I hope we find pockets of depth too! Reconnecting with old or new friends and sharing moments that remind me how lucky I am to have friends like you!”</li>
+                        </ul>
+                    </div>
+                   
+                    <h3 class="font-forum text-lg mt-8 mb-4 text-center text-[var(--text-color)] tracking-wider">HOW WOULD YOU LIKE TO START?</h3>
+                    <div class="flex flex-col gap-3">
+                        <button onclick="selectTheme('sweet')" class="w-full py-3 rounded border border-[var(--text-color)]/50 text-[var(--text-color)] font-mulish text-sm uppercase tracking-[0.1em] hover:bg-[var(--accent-color)] transition-colors">Sweet</button>
+                        <button onclick="selectTheme('spice')" class="w-full py-3 rounded border border-[var(--text-color)]/50 text-[var(--text-color)] font-mulish text-sm uppercase tracking-[0.1em] hover:bg-[var(--accent-color)] transition-colors">Spice</button>
+                        <button onclick="selectTheme('everything-nice')" class="w-full py-3 rounded border border-[var(--text-color)]/50 text-[var(--text-color)] font-mulish text-sm uppercase tracking-[0.1em] hover:bg-[var(--accent-color)] transition-colors">Everything Nice</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu-backdrop" class="hidden absolute inset-0 z-20 bg-[var(--bg-color)] opacity-0 transition-opacity duration-1000 pointer-events-none"></div>
+
+            <div id="physical-menu-container" class="hidden absolute inset-0 z-30 flex items-center justify-center p-6" style="perspective: 1500px;">
+                
+                <div onclick="openDetailedSchedule()" class="relative w-full max-w-[360px] h-[290px] shadow-book transition-transform hover:scale-[1.02] duration-300 cursor-pointer group mx-auto">
+                    
+                    <div class="absolute right-0 w-1/2 h-full static-paper rounded-r-md border-t border-r border-b border-[#CBB6A7] p-4 flex flex-col justify-center shadow-inner z-10">
+                        <h3 class="font-forum text-[14px] leading-tight text-center mb-4 tracking-[0.2em] border-b border-[#150C0C]/20 pb-2 text-[#150C0C]">PRELIMINARY<br>SCHEDULE</h3>
+                        
+                        <div class="flex-1 flex flex-col justify-center space-y-3 text-[#150C0C]">
+                            <div class="text-center">
+                                <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Friday 7.10</strong>
+                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Sweet Like Cinnamon</p>
+                                <div class="mt-0.5 text-[11px]">🤎 ✨</div>
+                                <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Saturday 7.11</strong>
+                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Hot Tamale</p>
+                                <div class="mt-0.5 text-[11px]">🌶️ 💃🏿</div>
+                                <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Sunday 7.12</strong>
+                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Vanilla & Veils</p>
+                                <div class="mt-0.5 text-[11px]">💍 🍾</div>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-x-0 bottom-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-mulish text-[8px] uppercase tracking-[0.2em] bg-[#150C0C] text-[#EDEBDE] px-3 py-1 rounded-full shadow-lg">Tap to expand</span>
+                        </div>
+                    </div>
+
+                    <div id="menu-left-page" class="absolute left-0 w-1/2 h-full z-20" style="transform-style: preserve-3d; transform-origin: right center; transform: rotateY(180deg);">
+                        
+                        <div class="absolute inset-0 static-paper rounded-l-md border border-[#CBB6A7] p-2 flex flex-col items-center justify-center shadow-inner" style="backface-visibility: hidden;">
+                            <div class="w-full h-full border border-[#150C0C]/20 p-1 flex items-center justify-center relative bg-[#E6E0D0]">
+                                <img src="https://via.placeholder.com/150x250/E6E0D0/150C0C?text=Menu+Art" alt="Menu Art" class="max-w-full max-h-full object-contain mix-blend-multiply opacity-80">
+                                <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#150C0C]/40"></div>
+                                <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#150C0C]/40"></div>
+                                <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#150C0C]/40"></div>
+                                <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#150C0C]/40"></div>
+                            </div>
+                        </div>
+
+                        <div id="menu-cover" class="absolute inset-0 rounded-md bg-[#3D0C11] shadow-2xl flex items-center justify-center overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg);">
+                            <div class="absolute inset-0 opacity-40 mix-blend-multiply pointer-events-none" style="background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.05%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+                            
+                            <div class="absolute inset-[6px] border-[1.5px] border-[#5A1E23] border-dashed rounded-sm pointer-events-none"></div>
+                            
+                            <div class="absolute top-0 left-0 w-[24px] h-[24px] border-t-[2.5px] border-l-[2.5px] border-[#5A1E23] rounded-tl-md pointer-events-none"></div>
+                            <div class="absolute top-0 right-0 w-[24px] h-[24px] border-t-[2.5px] border-r-[2.5px] border-[#5A1E23] rounded-tr-md pointer-events-none"></div>
+                            <div class="absolute bottom-0 left-0 w-[24px] h-[24px] border-b-[2.5px] border-l-[2.5px] border-[#5A1E23] rounded-bl-md pointer-events-none"></div>
+                            <div class="absolute bottom-0 right-0 w-[24px] h-[24px] border-b-[2.5px] border-r-[2.5px] border-[#5A1E23] rounded-br-md pointer-events-none"></div>
+                            
+                            <img src="https://via.placeholder.com/100x100/3D0C11/E9D6C7?text=BAR+MENU" class="absolute top-[30px] w-[80px] h-[80px]" />
+                        </div>
+                    </div>
+
+                    <div id="book-spine" class="absolute inset-y-0 left-1/2 w-8 -ml-4 bg-gradient-to-r from-transparent via-black/30 to-transparent z-30 pointer-events-none opacity-0 transition-opacity duration-1000"></div>
+
+                </div>
+
+            </div>
+
+            <div id="detailed-schedule-modal" class="hidden absolute inset-0 z-40 flex flex-col items-center justify-start pt-16 px-6 overflow-y-auto pb-24 opacity-0 transition-opacity duration-700 bg-[var(--bg-color)]">
+                
+                <button onclick="closeDetailedSchedule()" class="fixed top-6 right-6 z-50 p-2 rounded-full border border-[var(--text-color)] text-[var(--text-color)] hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors bg-[var(--bg-color)]/50 backdrop-blur-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <h2 class="font-forum text-3xl text-[var(--text-color)] mb-8 tracking-widest text-center">PRELIMINARY SCHEDULE</h2>
+               
+                <div class="w-full flex flex-col gap-6">
+                    <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
+                        <h3 class="font-forum text-xl text-[var(--text-color)]">Friday, 7.10</h3>
+                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Sweet Like Cinnamon</strong> 🤎 ✨</p>
+                        <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between"><span>X:00 PM:</span> <span>Event</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
+                        <h3 class="font-forum text-xl text-[var(--text-color)]">Saturday, 7.11</h3>
+                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Hot Tamale</strong> 🌶️ 💃🏿</p>
+                        <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between"><span>X:00 PM:</span> <span>Event</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
+                        <h3 class="font-forum text-xl text-[var(--text-color)]">Sunday, 7.12</h3>
+                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Vanilla & Veils</strong> 💍 🍾</p>
+                        <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
+                            <li class="flex justify-between"><span>X:00 PM:</span> <span>Event</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="w-full mt-8 mb-4">
+                    <p class="text-center font-mulish text-[10px] italic text-[var(--text-color)] opacity-70 mb-2">*Details are subject to change</p>
+                    <button id="unlock-btn" class="w-full flex items-center justify-center py-4 leading-none rounded-md border border-[var(--text-color)] text-[var(--text-color)] font-mulish text-sm uppercase tracking-widest transition-all hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] shadow-lg ephemera-box opacity-70">
+                        Full details unlocked on April 1
+                    </button>
+                </div>
+            </div>
+
+            <div id="theme-toggle-bar" class="hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--surface-color)] border-t border-[var(--accent-color)]/30 p-4 flex justify-center gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.5)] max-w-md mx-auto">
+                <button onclick="setTheme('sweet')" class="flex-1 py-2 text-[10px] font-mulish uppercase tracking-widest border border-[var(--text-color)]/30 text-[var(--text-color)] rounded hover:bg-[var(--accent-color)] transition-colors">Sweet</button>
+                <button onclick="setTheme('spice')" class="flex-1 py-2 text-[10px] font-mulish uppercase tracking-widest border border-[var(--text-color)]/30 text-[var(--text-color)] rounded hover:bg-[var(--accent-color)] transition-colors">Spice</button>
+                <button onclick="setTheme('everything-nice')" class="flex-1 py-2 text-[10px] font-mulish uppercase tracking-widest border border-[var(--text-color)]/30 text-[var(--text-color)] rounded hover:bg-[var(--accent-color)] transition-colors">Everything Nice</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        // --- COMPONENT 4 LOGIC ---
+        function initTheme() {
+            const savedTheme = localStorage.getItem('nimi-bday-theme');
+            if (savedTheme) {
+                document.body.className = `antialiased selection:bg-brand-700 selection:text-neutral-100 theme-${savedTheme}`;
+            }
+        }
+        
+        initTheme();
+
+        function setTheme(themeName) {
+            document.body.className = `antialiased selection:bg-brand-700 selection:text-neutral-100 theme-${themeName}`;
+            localStorage.setItem('nimi-bday-theme', themeName);
+        }
+
+        function selectTheme(themeName) {
+            setTheme(themeName);
+            closeThemeModalAndShowPhysicalMenu();
+        }
+
+        function showThemeModal() {
+            const modal = document.getElementById('theme-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 50);
+        }
+
+        // Seamless 3D SVG to HTML Physical Book Reveal
+        function closeThemeModalAndShowPhysicalMenu() {
+            const modal = document.getElementById('theme-modal');
+            modal.classList.add('opacity-0');
+            
+            const physicalMenuContainer = document.getElementById('physical-menu-container');
+            const menuBackdrop = document.getElementById('menu-backdrop');
+            const toggleBar = document.getElementById('theme-toggle-bar');
+
+            // Reset book state 
+            gsap.set("#menu-left-page", { rotationY: 180 });
+            gsap.set("#book-spine", { opacity: 0 });
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                
+                // 1. Shift the SVG menu to exactly match the closed HTML cover position
+                gsap.to("#bar-menu", {
+                    x: 165, 
+                    y: 215, 
+                    scale: 0.85,
+                    transformOrigin: "50% 50%",
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    onComplete: () => {
+                        // 2. Instantly swap SVG menu for the identical HTML cover
+                        gsap.set("#bar-menu", { opacity: 0 });
+                        physicalMenuContainer.classList.remove('hidden');
+                        
+                        // Show the background transitioning seamlessly behind the book
+                        menuBackdrop.classList.remove('hidden');
+                        setTimeout(() => {
+                            menuBackdrop.classList.remove('opacity-0');
+                        }, 20);
+
+                        toggleBar.classList.remove('hidden');
+                        
+                        // Fade out the underlying SVG Table
+                        gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
+                        
+                        // 3. Slowly crack open the physical book
+                        gsap.to("#menu-left-page", { 
+                            rotationY: 0, 
+                            duration: 3, 
+                            ease: "power3.inOut", 
+                            delay: 0.5 
+                        });
+                        
+                        // Fade in the spine shadow to give it 3D depth
+                        gsap.to("#book-spine", {
+                            opacity: 1,
+                            duration: 1.5,
+                            delay: 2.0
+                        });
+                    }
+                });
+            }, 700);
+        }
+
+        function openDetailedSchedule() {
+            const detailedSchedule = document.getElementById('detailed-schedule-modal');
+            detailedSchedule.classList.remove('hidden');
+            setTimeout(() => {
+                detailedSchedule.classList.remove('opacity-0');
+            }, 50);
+        }
+
+        function closeDetailedSchedule() {
+            const detailedSchedule = document.getElementById('detailed-schedule-modal');
+            detailedSchedule.classList.add('opacity-0');
+            setTimeout(() => {
+                detailedSchedule.classList.add('hidden');
+            }, 700);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+                       
+            const TEST_DATE = "2026-03-22T12:00:00-06:00";
+           
+            const realWorldInitTime = new Date().getTime();
+            const simulatedInitTime = TEST_DATE ? new Date(TEST_DATE).getTime() : realWorldInitTime;
+            const timeOffset = simulatedInitTime - realWorldInitTime;
+           
+            function getCurrentTime() {
+                return new Date().getTime() + timeOffset;
+            }
+
+            const targetDate = new Date("2026-03-15T00:01:00-06:00").getTime();
+            const aprilDate = new Date("2026-04-01T00:00:00-06:00").getTime();
+            const now = getCurrentTime();
+
+            if (now >= aprilDate) {
+                document.getElementById('unlock-btn').innerText = "Unlock Menu";
+                document.getElementById('unlock-btn').classList.remove('opacity-70');
+            }
+
+            const phase1 = document.getElementById('phase1');
+            const phase2 = document.getElementById('phase2');
+
+            if (now >= targetDate) {
+                phase1.classList.add('hidden');
+                phase2.classList.remove('hidden');
+                initPhase2GSAP();
+            } else {
+                initPhase1Countdown(targetDate);
+            }
+
+            function initPhase1Countdown(targetTime) {
+                const startDate = new Date("2026-02-01T00:00:00-06:00").getTime();
+                const totalDuration = targetTime - startDate;
+
+                const elDays = document.getElementById('t-days');
+                const elHours = document.getElementById('t-hours');
+                const elMins = document.getElementById('t-mins');
+                const elSecs = document.getElementById('t-secs');
+
+                const candleBody = document.getElementById('candle-body');
+               
+                function updateApplication() {
+                    const dynamicNow = getCurrentTime();
+                    const distance = targetTime - dynamicNow;
+
+                    if (distance > 0) {
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        elDays.innerText = String(days).padStart(2, '0');
+                        elHours.innerText = String(hours).padStart(2, '0');
+                        elMins.innerText = String(minutes).padStart(2, '0');
+                        elSecs.innerText = String(seconds).padStart(2, '0');
+
+                        let elapsed = dynamicNow - startDate;
+                        if (elapsed < 0) elapsed = 0;
+                       
+                        let burnRatio = elapsed / totalDuration;
+                        if (burnRatio > 1) burnRatio = 1;
+
+                        const currentHeightPct = 100 * (1 - burnRatio);
+                        candleBody.style.height = `${currentHeightPct}%`;
+
+                    } else {
+                        phase1.style.opacity = '0';
+                        setTimeout(() => {
+                            phase1.classList.add('hidden');
+                            phase2.classList.remove('hidden');
+                            initPhase2GSAP();
+                        }, 1000);
+                       
+                        if (typeof interval !== 'undefined') clearInterval(interval);
+                    }
+                }
+
+                updateApplication();
+                const interval = setInterval(updateApplication, 1000);
+            }
+
+            function initPhase2GSAP() {
+                const knockerWrapper = document.getElementById('knocker-wrapper');
+                let isDoorAnimating = false;
+
+                if (knockerWrapper) {
+                    knockerWrapper.addEventListener('click', () => {
+                        if(isDoorAnimating) return;
+                        isDoorAnimating = true;
+
+                        const tl = gsap.timeline();
+
+                        gsap.set("#knocker-ring", { transformOrigin: "50% -10px" });
+
+                        tl.to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out" })
+                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                         
+                          .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
+                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                         
+                          .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
+                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                         
+                          .to("#knocker-ring", { duration: 0.3 })
+
+                          .add("split")
+                          .to("#door-left", { x: -250, duration: 1.8, ease: "power3.inOut" }, "split")
+                          .to("#door-right", { x: 250, duration: 1.8, ease: "power3.inOut" }, "split")
+                          .to("#knocker-wrapper", { opacity: 0, duration: 0.5 }, "split")
+
+                          .to("#host-stand", { opacity: 1, duration: 1.2, ease: "power2.out" }, "split+=1.0")
+                         
+                          .set("#speakeasy-door", { display: "none" })
+                          .call(startMatchTimer);
+                    });
+                }
+               
+                let matchTimer;
+                let isMatchAnimating = false;
+
+                gsap.set("#single-match-wrapper", { svgOrigin: "134 654" });
+               
+                gsap.set("#match-flame", { scale: 0, svgOrigin: "148 628" });
+
+                const matchWiggle = gsap.timeline({ paused: true, repeat: -1 })
+                    .to("#single-match-wrapper", { filter: "drop-shadow(0px 0px 8px rgba(244,125,32,0.9))", duration: 0.3 })
+                    .to("#single-match-wrapper", { rotation: 8, duration: 0.135, ease: "sine.inOut", yoyo: true, repeat: 5 }, "<")
+                    .to("#single-match-wrapper", { rotation: 0, duration: 1.5 })
+                    .to("#single-match-wrapper", { filter: "none", duration: 0.3 }, "-=1.5");
+
+                function startMatchTimer() {
+                    matchTimer = setTimeout(() => {
+                        matchWiggle.play();
+                    }, 2000);
+                }
+
+                const matchClickTarget = document.getElementById('single-match-wrapper');
+               
+                if (matchClickTarget) {
+                    matchClickTarget.addEventListener('click', () => {
+                        if(isMatchAnimating) return;
+                        isMatchAnimating = true;
+
+                        clearTimeout(matchTimer);
+                        matchWiggle.pause();
+                       
+                        gsap.set("#single-match-wrapper", { rotation: 0, filter: "none" });
+                        gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
+
+                        const strikeTl = gsap.timeline();
+
+                        strikeTl
+                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 1.5, ease: "power2.inOut" })
+                            .to("#match-flame", { rotation: 10, duration: 1.5, ease: "power2.inOut" }, "<")
+
+                            .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.5, ease: "power4.in" })
+                           
+                            .to("#match-flame", { opacity: 1, scale: 0.5, duration: 0.2, ease: "back.out(2)" })
+                           
+                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: 2.5, ease: "power2.inOut", delay: 0.2 })
+                            .to("#match-flame", { rotation: -15, duration: 2.5, ease: "power2.inOut" }, "<")
+                           
+                            .add("burn")
+                            .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 1, duration: 0.2 }, "burn")
+                            .to(["#burn-hole-mask", "#burn-edge-ring", "#burn-edge-inner"], { y: -300, duration: 3.4, ease: "power1.in" }, "burn+=0.2")
+                           
+                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.5, ease: "power2.in" }, "burn+=1.5")
+                            .to("#match-flame", { rotation: 40, duration: 1.5, ease: "power2.in" }, "<")
+                           
+                            .to("#cocktail-napkin", { opacity: 0, duration: 1 }, "burn+=2.5")
+                           
+                            .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 0, duration: 0.5 }, "burn+=3.2")
+                           
+                            .set("#cocktail-napkin", { display: "none" }, "burn+=3.2")
+                            
+                            .call(showThemeModal, [], "burn+=5.0");
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
