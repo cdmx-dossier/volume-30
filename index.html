@@ -139,7 +139,7 @@
             position: relative;
         }
 
-      .candle-body {
+        .candle-body {
             width: 50px;
             height: 100%;
             background: linear-gradient(to right, #1f100c 0%, #593522 25%, #7a4b31 50%, #593522 75%, #1f100c 100%);
@@ -181,6 +181,20 @@
             50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.9; box-shadow: 0 -8px 30px rgba(255, 120, 0, 0.5), 0 12px 50px rgba(255, 220, 50, 0.5); }
             75% { transform: scale(1.01) rotate(0.5deg); opacity: 1; }
             100% { transform: scale(0.99) rotate(-1.5deg); opacity: 0.85; box-shadow: 0 -4px 20px rgba(255, 90, 0, 0.3), 0 8px 30px rgba(255, 190, 50, 0.4); }
+        }
+
+        /* SVG Flame Keyframes */
+        @keyframes svg-slow-flicker {
+            0% { transform: scale(1) rotate(-1deg); opacity: 0.85; filter: drop-shadow(0 -5px 15px rgba(255, 100, 0, 0.4)); }
+            25% { transform: scale(1.02) rotate(1deg); opacity: 0.95; }
+            50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.9; filter: drop-shadow(0 -8px 20px rgba(255, 120, 0, 0.5)); }
+            75% { transform: scale(1.01) rotate(0.5deg); opacity: 1; }
+            100% { transform: scale(0.99) rotate(-1.5deg); opacity: 0.85; filter: drop-shadow(0 -4px 10px rgba(255, 90, 0, 0.3)); }
+        }
+
+        .svg-flame-flicker {
+            animation: svg-slow-flicker 1.5s infinite alternate ease-in-out;
+            transform-origin: 148px 628px;
         }
 
         .ephemera-box {
@@ -325,10 +339,18 @@
                         <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" result="blend" />
                         <feComposite in="blend" in2="SourceGraphic" operator="in" />
                     </filter>
-                    <filter id="ragged-edge">
+                    
+                    <filter id="ragged-edge" color-interpolation-filters="linearRGB" primitiveUnits="userSpaceOnUse">
                         <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
                     </filter>
+
+                    <radialGradient id="match-flame-grad" cx="50%" cy="80%" r="60%">
+                        <stop offset="10%" stop-color="#ffffff"/>
+                        <stop offset="30%" stop-color="#ffe266"/>
+                        <stop offset="60%" stop-color="#f47d20"/>
+                        <stop offset="100%" stop-color="#f47d20" stop-opacity="0"/>
+                    </radialGradient>
                 </defs>
                 
                 <rect width="400" height="800" fill="#0c0705" />
@@ -348,7 +370,6 @@
                 <g id="cocktail-napkin" transform="translate(130, 160) rotate(-12)" filter="url(#soft-shadow)">
                  <mask id="burn-mask">
                         <rect width="300" height="300" x="-50" y="-50" fill="white" />
-                        
                         <rect id="burn-hole-mask" x="-400" y="150" width="1000" height="1200" fill="black" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" />
                     </mask>
 
@@ -359,8 +380,10 @@
                         <image href="https://via.placeholder.com/30/EDEBDE/800100?text=LOGO" x="96" y="96" width="30" height="30" />
                     </g>
 
-                    <line id="burn-edge-ring" x1="-400" y1="150" x2="600" y2="150" stroke="#3A2318" stroke-width="14" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0" />
-                    <line id="burn-edge-inner" x1="-400" y1="150" x2="600" y2="150" stroke="#f47d20" stroke-width="4" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0" />
+                    <g id="burn-edges-group" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0">
+                        <line id="burn-edge-ring" x1="-400" y1="150" x2="600" y2="150" stroke="#3A2318" stroke-width="14" />
+                        <line id="burn-edge-inner" x1="-400" y1="150" x2="600" y2="150" stroke="#f47d20" stroke-width="4" />
+                    </g>
                 </g>
 
                 <g id="matchbox" transform="translate(60, 600) rotate(8)" filter="url(#soft-shadow)">
@@ -385,9 +408,7 @@
                     </g>
                     
                     <g id="match-flame">
-                        <foreignObject x="137" y="573" width="22" height="55">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="candle-flame" style="margin: 0; filter: drop-shadow(0 0 10px rgba(244,125,32,0.6));"></div>
-                        </foreignObject>
+                        <path d="M 148 628 C 136 628 136 595 148 573 C 160 595 160 628 148 628 Z" fill="url(#match-flame-grad)" class="svg-flame-flicker" />
                     </g>
                 </g>
             </svg>
@@ -874,6 +895,7 @@
 
                 gsap.set("#single-match-wrapper", { svgOrigin: "134 654" });
                 
+                // Set the initial state of the native SVG flame path
                 gsap.set("#match-flame", { scale: 0, svgOrigin: "148 628" });
 
                 const matchWiggle = gsap.timeline({ paused: true, repeat: -1 })
@@ -901,33 +923,40 @@
                         gsap.set("#single-match-wrapper", { rotation: 0, filter: "none" });
                         gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
 
+                        // FIX 5: Adjust GSAP timing dynamically based on screen size
+                        const isMobile = window.innerWidth < 768 || navigator.maxTouchPoints > 0;
+                        const speed = isMobile ? 0.65 : 1;
+                        const dur = (time) => time * speed;
+
                         const strikeTl = gsap.timeline();
 
                         strikeTl
-                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 1.5, ease: "power2.inOut" })
-                            .to("#match-flame", { rotation: 10, duration: 1.5, ease: "power2.inOut" }, "<")
+                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: dur(1.5), ease: "power2.inOut" })
+                            .to("#match-flame", { rotation: 10, duration: dur(1.5), ease: "power2.inOut" }, "<")
 
-                            .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.5, ease: "power4.in" })
+                            .to("#single-match-wrapper", { x: -43, y: 42, duration: dur(0.5), ease: "power4.in" })
                             
-                            .to("#match-flame", { opacity: 1, scale: 0.5, duration: 0.2, ease: "back.out(2)" })
+                            .to("#match-flame", { opacity: 1, scale: 0.5, duration: dur(0.2), ease: "back.out(2)" })
                             
-                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: 2.5, ease: "power2.inOut", delay: 0.2 })
-                            .to("#match-flame", { rotation: -15, duration: 2.5, ease: "power2.inOut" }, "<")
+                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: dur(2.5), ease: "power2.inOut", delay: dur(0.2) })
+                            .to("#match-flame", { rotation: -15, duration: dur(2.5), ease: "power2.inOut" }, "<")
                             
                             .add("burn")
-                            .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 1, duration: 0.2 }, "burn")
-                            .to(["#burn-hole-mask", "#burn-edge-ring", "#burn-edge-inner"], { y: -300, duration: 3.4, ease: "power1.in" }, "burn+=0.2")
+                            .to("#burn-edges-group", { opacity: 1, duration: dur(0.2) }, "burn")
                             
-                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.5, ease: "power2.in" }, "burn+=1.5")
-                            .to("#match-flame", { rotation: 40, duration: 1.5, ease: "power2.in" }, "<")
+                            // FIX 1: Animate combined burn group along with the hole mask
+                            .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: dur(3.4), ease: "power1.in" }, `burn+=${dur(0.2)}`)
                             
-                            .to("#cocktail-napkin", { opacity: 0, duration: 1 }, "burn+=2.5")
+                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: dur(1.5), ease: "power2.in" }, `burn+=${dur(1.5)}`)
+                            .to("#match-flame", { rotation: 40, duration: dur(1.5), ease: "power2.in" }, "<")
                             
-                            .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 0, duration: 0.5 }, "burn+=3.2")
+                            .to("#cocktail-napkin", { opacity: 0, duration: dur(1) }, `burn+=${dur(2.5)}`)
                             
-                            .set("#cocktail-napkin", { display: "none" }, "burn+=3.2")
+                            .to("#burn-edges-group", { opacity: 0, duration: dur(0.5) }, `burn+=${dur(3.2)}`)
                             
-                            .call(showThemeModal, [], "burn+=5.0");
+                            .set("#cocktail-napkin", { display: "none" }, `burn+=${dur(3.2)}`)
+                            
+                            .call(showThemeModal, [], `burn+=${dur(5.0)}`);
                     });
                 }
             }
