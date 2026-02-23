@@ -62,7 +62,6 @@
             --theme-label-color: #AE856A;
         }
 
-        /* --- COMPONENT 4 THEMES --- */
         .theme-sweet {
             --bg-color: #E9D6C7;
             --surface-color: #AE856A;
@@ -85,7 +84,6 @@
             --theme-label-color: #363936;
         }
 
-        /* Smooth transitioning */
         body, .ephemera-box, button, h1, h2, h3, p, div:not(.static-paper):not(#menu-cover), svg path {
             transition: background-color 3s ease-in-out, color 3s ease-in-out, border-color 3s ease-in-out, fill 3s ease-in-out;
         }
@@ -181,20 +179,6 @@
             50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.9; box-shadow: 0 -8px 30px rgba(255, 120, 0, 0.5), 0 12px 50px rgba(255, 220, 50, 0.5); }
             75% { transform: scale(1.01) rotate(0.5deg); opacity: 1; }
             100% { transform: scale(0.99) rotate(-1.5deg); opacity: 0.85; box-shadow: 0 -4px 20px rgba(255, 90, 0, 0.3), 0 8px 30px rgba(255, 190, 50, 0.4); }
-        }
-
-        /* SVG Flame Keyframes */
-        @keyframes svg-slow-flicker {
-            0% { transform: scale(1) rotate(-1deg); opacity: 0.85; filter: drop-shadow(0 -5px 15px rgba(255, 100, 0, 0.4)); }
-            25% { transform: scale(1.02) rotate(1deg); opacity: 0.95; }
-            50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.9; filter: drop-shadow(0 -8px 20px rgba(255, 120, 0, 0.5)); }
-            75% { transform: scale(1.01) rotate(0.5deg); opacity: 1; }
-            100% { transform: scale(0.99) rotate(-1.5deg); opacity: 0.85; filter: drop-shadow(0 -4px 10px rgba(255, 90, 0, 0.3)); }
-        }
-
-        .svg-flame-flicker {
-            animation: svg-slow-flicker 1.5s infinite alternate ease-in-out;
-            transform-origin: 148px 628px;
         }
 
         .ephemera-box {
@@ -333,12 +317,6 @@
                     <filter id="soft-shadow" x="-20%" y="-20%" width="150%" height="150%">
                         <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.5"/>
                     </filter>
-                    <filter id="rust-texture">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
-                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" in="noise" result="coloredNoise" />
-                        <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" result="blend" />
-                        <feComposite in="blend" in2="SourceGraphic" operator="in" />
-                    </filter>
                     
                     <filter id="ragged-edge" color-interpolation-filters="linearRGB" primitiveUnits="userSpaceOnUse">
                         <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
@@ -407,8 +385,10 @@
                         <circle cx="149" cy="627" r="2" fill="#a81515" />
                     </g>
                     
-                    <g id="match-flame">
-                        <path d="M 148 628 C 136 628 136 595 148 573 C 160 595 160 628 148 628 Z" fill="url(#match-flame-grad)" class="svg-flame-flicker" />
+                    <g id="match-flame" opacity="0">
+                        <g id="flame-flicker">
+                            <path d="M 148 628 C 136 628 136 595 148 573 C 160 595 160 628 148 628 Z" fill="url(#match-flame-grad)" />
+                        </g>
                     </g>
                 </g>
             </svg>
@@ -663,7 +643,6 @@
     </main>
 
     <script>
-        // --- COMPONENT 4 LOGIC ---
         function initTheme() {
             const savedTheme = localStorage.getItem('nimi-bday-theme');
             if (savedTheme) {
@@ -689,7 +668,6 @@
             setTimeout(() => modal.classList.remove('opacity-0'), 50);
         }
 
-        // Seamless 3D SVG to HTML Physical Book Reveal
         function closeThemeModalAndShowPhysicalMenu() {
             const modal = document.getElementById('theme-modal');
             modal.classList.add('opacity-0');
@@ -698,14 +676,12 @@
             const menuBackdrop = document.getElementById('menu-backdrop');
             const toggleBar = document.getElementById('theme-toggle-bar');
 
-            // Reset book state
             gsap.set("#menu-left-page", { rotationY: 180 });
             gsap.set("#book-spine", { opacity: 0 });
 
             setTimeout(() => {
                 modal.classList.add('hidden');
                 
-                // 1. Shift the SVG menu to exactly match the closed HTML cover position
                 gsap.to("#bar-menu", {
                     x: 165,
                     y: 215,
@@ -714,11 +690,9 @@
                     duration: 1.5,
                     ease: "power3.inOut",
                     onComplete: () => {
-                        // 2. Instantly swap SVG menu for the identical HTML cover
                         gsap.set("#bar-menu", { opacity: 0 });
                         physicalMenuContainer.classList.remove('hidden');
                         
-                        // Show the background transitioning seamlessly behind the book
                         menuBackdrop.classList.remove('hidden');
                         setTimeout(() => {
                             menuBackdrop.classList.remove('opacity-0');
@@ -726,10 +700,8 @@
 
                         toggleBar.classList.remove('hidden');
                         
-                        // Fade out the underlying SVG Table
                         gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
                         
-                        // 3. Slowly crack open the physical book
                         gsap.to("#menu-left-page", {
                             rotationY: 0,
                             duration: 3,
@@ -744,7 +716,6 @@
                             }
                         });
                         
-                        // Fade in the spine shadow to give it 3D depth
                         gsap.to("#book-spine", {
                             opacity: 1,
                             duration: 1.5,
@@ -895,14 +866,14 @@
 
                 gsap.set("#single-match-wrapper", { svgOrigin: "134 654" });
                 
-                // Set the initial state of the native SVG flame path
-                gsap.set("#match-flame", { scale: 0, svgOrigin: "148 628" });
+                // Set the initial states of the flame containers
+                gsap.set("#match-flame", { scale: 0.1, opacity: 0, svgOrigin: "148 628" });
+                gsap.set("#flame-flicker", { svgOrigin: "148 628" });
 
+                // Removed the intensive filter drop-shadow from the pre-click wiggle
                 const matchWiggle = gsap.timeline({ paused: true, repeat: -1 })
-                    .to("#single-match-wrapper", { filter: "drop-shadow(0px 0px 8px rgba(244,125,32,0.9))", duration: 0.3 })
-                    .to("#single-match-wrapper", { rotation: 8, duration: 0.135, ease: "sine.inOut", yoyo: true, repeat: 5 }, "<")
-                    .to("#single-match-wrapper", { rotation: 0, duration: 1.5 })
-                    .to("#single-match-wrapper", { filter: "none", duration: 0.3 }, "-=1.5");
+                    .to("#single-match-wrapper", { rotation: 8, duration: 0.135, ease: "sine.inOut", yoyo: true, repeat: 5 })
+                    .to("#single-match-wrapper", { rotation: 0, duration: 1.5 });
 
                 function startMatchTimer() {
                     matchTimer = setTimeout(() => {
@@ -920,43 +891,47 @@
                         clearTimeout(matchTimer);
                         matchWiggle.pause();
                         
-                        gsap.set("#single-match-wrapper", { rotation: 0, filter: "none" });
+                        gsap.set("#single-match-wrapper", { rotation: 0 });
                         gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
 
-                        // FIX 5: Adjust GSAP timing dynamically based on screen size
-                        const isMobile = window.innerWidth < 768 || navigator.maxTouchPoints > 0;
-                        const speed = isMobile ? 0.65 : 1;
-                        const dur = (time) => time * speed;
-
+                        // Heavily reduced, rapid-fire timeline
                         const strikeTl = gsap.timeline();
 
                         strikeTl
-                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: dur(1.5), ease: "power2.inOut" })
-                            .to("#match-flame", { rotation: 10, duration: dur(1.5), ease: "power2.inOut" }, "<")
-
-                            .to("#single-match-wrapper", { x: -43, y: 42, duration: dur(0.5), ease: "power4.in" })
+                            // Draw back fast
+                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 0.3, ease: "power2.inOut" })
+                            // Strike instantly
+                            .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.15, ease: "power4.in" })
+                            // Ignite flame
+                            .to("#match-flame", { opacity: 1, scale: 0.6, duration: 0.2, ease: "back.out(2)" })
+                            .add(() => {
+                                // Pure GSAP continuous flicker logic to dodge CSS conflicts
+                                gsap.to("#flame-flicker", {
+                                    scaleX: 1.05, 
+                                    scaleY: 0.95, 
+                                    rotation: 2,
+                                    duration: 0.12, 
+                                    yoyo: true, 
+                                    repeat: -1, 
+                                    ease: "sine.inOut"
+                                });
+                            }, "<")
                             
-                            .to("#match-flame", { opacity: 1, scale: 0.5, duration: dur(0.2), ease: "back.out(2)" })
+                            // Move to napkin quickly
+                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: 0.6, ease: "power2.inOut", delay: 0.1 })
                             
-                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: dur(2.5), ease: "power2.inOut", delay: dur(0.2) })
-                            .to("#match-flame", { rotation: -15, duration: dur(2.5), ease: "power2.inOut" }, "<")
-                            
+                            // Burn sequence
                             .add("burn")
-                            .to("#burn-edges-group", { opacity: 1, duration: dur(0.2) }, "burn")
+                            .to("#burn-edges-group", { opacity: 1, duration: 0.1 }, "burn")
+                            .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: 1.2, ease: "power1.in" }, "burn+=0.1")
                             
-                            // FIX 1: Animate combined burn group along with the hole mask
-                            .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: dur(3.4), ease: "power1.in" }, `burn+=${dur(0.2)}`)
+                            // Match drops away
+                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 0.6, ease: "power2.in" }, "burn+=0.4")
                             
-                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: dur(1.5), ease: "power2.in" }, `burn+=${dur(1.5)}`)
-                            .to("#match-flame", { rotation: 40, duration: dur(1.5), ease: "power2.in" }, "<")
-                            
-                            .to("#cocktail-napkin", { opacity: 0, duration: dur(1) }, `burn+=${dur(2.5)}`)
-                            
-                            .to("#burn-edges-group", { opacity: 0, duration: dur(0.5) }, `burn+=${dur(3.2)}`)
-                            
-                            .set("#cocktail-napkin", { display: "none" }, `burn+=${dur(3.2)}`)
-                            
-                            .call(showThemeModal, [], `burn+=${dur(5.0)}`);
+                            // Napkin fade and modal presentation
+                            .to("#cocktail-napkin", { opacity: 0, duration: 0.4 }, "burn+=1.0")
+                            .set("#cocktail-napkin", { display: "none" })
+                            .call(showThemeModal, [], "burn+=1.2");
                     });
                 }
             }
