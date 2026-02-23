@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nimi's 30th Birthday</title>
-   
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌶️</text></svg>">
-   
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet">
-   
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Mulish:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-   
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -68,21 +68,21 @@
             --surface-color: #AE856A;
             --accent-color: #693B2D;
             --text-color: #150C0C;
-            --theme-label-color: #150C0C; 
+            --theme-label-color: #150C0C;
         }
         .theme-spice {
             --bg-color: #200100;
             --surface-color: #630100;
             --accent-color: #800100;
             --text-color: #EDEBDE;
-            --theme-label-color: #150C0C; 
+            --theme-label-color: #150C0C;
         }
         .theme-everything-nice {
             --bg-color: #E6E0D0;
             --surface-color: #CBB6A7;
             --accent-color: #B18177;
             --text-color: #363936;
-            --theme-label-color: #363936; 
+            --theme-label-color: #363936;
         }
 
         /* Smooth transitioning */
@@ -111,15 +111,15 @@
             align-items: center;
             justify-content: flex-end;
             height: 35vh;
-            max-height: 300px; 
-            min-height: 150px; 
+            max-height: 300px;
+            min-height: 150px;
             filter: drop-shadow(0px 20px 20px rgba(0,0,0,0.8));
         }
 
         .candle-flame {
             width: 22px;
             height: 55px;
-            flex-shrink: 0; 
+            flex-shrink: 0;
             background: radial-gradient(ellipse at 50% 80%, #ffffff 10%, #ffe266 30%, #f47d20 60%, transparent 90%);
             border-radius: 50% 50% 20% 20% / 60% 60% 30% 30%;
             animation: slow-flicker 1.5s infinite alternate ease-in-out;
@@ -131,7 +131,7 @@
         .candle-wick {
             width: 3px;
             height: 12px;
-            flex-shrink: 0; 
+            flex-shrink: 0;
             background: linear-gradient(to bottom, #111, #3a1c0b);
             border-radius: 2px 2px 0 0;
             margin-bottom: -3px;
@@ -141,7 +141,7 @@
 
       .candle-body {
             width: 50px;
-            height: 100%; 
+            height: 100%;
             background: linear-gradient(to right, #1f100c 0%, #593522 25%, #7a4b31 50%, #593522 75%, #1f100c 100%);
             border-left: 1px solid rgba(0,0,0,0.5);
             border-right: 1px solid rgba(0,0,0,0.5);
@@ -196,7 +196,7 @@
             position: relative;
             overflow: hidden;
         }
-       
+        
         .ephemera-box::before, .static-paper::before {
             content: "";
             position: absolute;
@@ -298,7 +298,7 @@
         </div>
 
         <div id="phase2" class="hidden absolute inset-0 w-full h-full z-20">
-           
+            
             <svg id="host-stand" class="absolute inset-0 w-full h-full opacity-0" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <filter id="leather-texture">
@@ -330,7 +330,7 @@
                         <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G" />
                     </filter>
                 </defs>
-               
+                
                 <rect width="400" height="800" fill="#0c0705" />
                 <rect width="400" height="800" fill="#1c0f0a" opacity="0.4" filter="url(#leather-texture)" />
 
@@ -341,14 +341,14 @@
                     <path d="M 220 30 L 220 0 L 190 0" fill="none" stroke="#5A1E23" stroke-width="3" />
                     <path d="M 0 320 L 0 350 L 30 350" fill="none" stroke="#5A1E23" stroke-width="3" />
                     <path d="M 220 320 L 220 350 L 190 350" fill="none" stroke="#5A1E23" stroke-width="3" />
-                   
+                    
                     <image href="https://via.placeholder.com/100x100/3D0C11/E9D6C7?text=BAR+MENU" x="60" y="40" width="100" height="100" />
                 </g>
-               
+                
                 <g id="cocktail-napkin" transform="translate(130, 160) rotate(-12)" filter="url(#soft-shadow)">
                  <mask id="burn-mask">
                         <rect width="300" height="300" x="-50" y="-50" fill="white" />
-                       
+                        
                         <rect id="burn-hole-mask" x="-400" y="150" width="1000" height="1200" fill="black" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" />
                     </mask>
 
@@ -365,11 +365,11 @@
 
                 <g id="matchbox" transform="translate(60, 600) rotate(8)" filter="url(#soft-shadow)">
                     <rect width="60" height="90" fill="#E9D6C7" filter="url(#paper-texture)" />
-                   
+                    
                     <path d="M 60 0 L 70 6 L 70 96 L 60 90 Z" fill="#CBB6A7" />
                     <path d="M 60 10 L 70 16 L 70 86 L 60 80 Z" fill="#363936" />
                     <path d="M 60 15 L 70 21 M 60 25 L 70 31 M 60 35 L 70 41 M 60 45 L 70 51 M 60 55 L 70 61 M 60 65 L 70 71 M 60 75 L 70 81" stroke="#150C0C" stroke-width="1" />
-                   
+                    
                     <rect x="4" y="4" width="52" height="82" fill="none" stroke="#2b4b6f" stroke-width="2" />
                     <text x="8" y="16" font-family="Mulish" font-weight="bold" font-size="10" fill="#150C0C">30</text>
                     <path d="M 25 30 Q 15 42 30 65 Q 45 45 45 32 Q 38 25 25 30 Z" fill="#b01010" />
@@ -383,7 +383,7 @@
                         <circle cx="148" cy="628" r="4" fill="#800100" />
                         <circle cx="149" cy="627" r="2" fill="#a81515" />
                     </g>
-                   
+                    
                     <g id="match-flame">
                         <foreignObject x="137" y="573" width="22" height="55">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="candle-flame" style="margin: 0; filter: drop-shadow(0 0 10px rgba(244,125,32,0.6));"></div>
@@ -412,7 +412,7 @@
                         <stop offset="50%" stop-color="#54321d" />
                         <stop offset="100%" stop-color="#1a0f0a" />
                     </radialGradient>
-                   
+                    
                     <filter id="contact-shadow" x="-20%" y="-20%" width="150%" height="150%">
                         <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.9"/>
                     </filter>
@@ -475,7 +475,7 @@
                     </g>
                 </g>
             </svg>
-           
+            
             <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-700">
                 <div class="ephemera-box p-6 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">
                     <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">THE SPICE OF LIFE</h2>
@@ -488,7 +488,7 @@
                             <li><strong class="text-[var(--theme-label-color)]">Soulful:</strong> During the weekend’s schedule, I hope we find pockets of depth too! Reconnecting with old or new friends and sharing moments that remind me how lucky I am to have friends like you!”</li>
                         </ul>
                     </div>
-                   
+                    
                     <h3 class="font-forum text-lg mt-8 mb-4 text-center text-[var(--text-color)] tracking-wider">HOW WOULD YOU LIKE TO START?</h3>
                     <div class="flex flex-col gap-3">
                         <button onclick="selectTheme('sweet')" class="w-full py-3 rounded border border-[var(--text-color)]/50 text-[var(--text-color)] font-mulish text-sm uppercase tracking-[0.1em] hover:bg-[var(--accent-color)] transition-colors">Sweet</button>
@@ -504,32 +504,32 @@
                 
                 <div onclick="openDetailedSchedule()" class="relative w-full max-w-[360px] h-[290px] shadow-book transition-transform hover:scale-[1.02] duration-300 cursor-pointer group mx-auto">
                     
-                    <div class="absolute right-0 w-1/2 h-full static-paper rounded-r-md border-t border-r border-b border-[#CBB6A7] p-4 flex flex-col justify-center shadow-inner z-10">
-                        <h3 class="font-forum text-[14px] leading-tight text-center mb-4 tracking-[0.2em] border-b border-[#150C0C]/20 pb-2 text-[#150C0C]">PRELIMINARY<br>SCHEDULE</h3>
+                    <div class="absolute right-0 w-1/2 h-full static-paper rounded-r-md border-t border-r border-b border-[#CBB6A7] p-3 pb-2 flex flex-col shadow-inner z-10">
+                        <h3 class="font-forum text-[14px] leading-tight text-center mt-3 mb-2 tracking-[0.2em] border-b border-[#150C0C]/20 pb-2 text-[#150C0C]">PRELIMINARY<br>SCHEDULE</h3>
                         
-                        <div class="flex-1 flex flex-col justify-center space-y-3 text-[#150C0C]">
+                        <div class="flex-1 flex flex-col justify-evenly text-[#150C0C] mb-2">
                             <div class="text-center">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Friday 7.10</strong>
-                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Sweet Like Cinnamon</p>
-                                <div class="mt-0.5 text-[11px]">🤎 ✨</div>
+                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Sweet Like Cinnamon</p>
+                                <div class="mt-0.5 text-[12px]">🤎 ✨</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
                             <div class="text-center">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Saturday 7.11</strong>
-                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Hot Tamale</p>
-                                <div class="mt-0.5 text-[11px]">🌶️ 💃🏿</div>
+                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Hot Tamale</p>
+                                <div class="mt-0.5 text-[12px]">🌶️ 💃🏿</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
                             <div class="text-center">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Sunday 7.12</strong>
-                                <p class="font-mulish text-[10px] uppercase tracking-wider opacity-90">Vanilla & Veils</p>
-                                <div class="mt-0.5 text-[11px]">💍 🍾</div>
+                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Vanilla & Veils</p>
+                                <div class="mt-0.5 text-[12px]">💍 🍾</div>
                             </div>
                         </div>
 
-                        <div class="absolute inset-x-0 bottom-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div id="tap-to-expand" class="w-full text-center opacity-0 pb-1">
                             <span class="font-mulish text-[8px] uppercase tracking-[0.2em] bg-[#150C0C] text-[#EDEBDE] px-3 py-1 rounded-full shadow-lg">Tap to expand</span>
                         </div>
                     </div>
@@ -575,11 +575,15 @@
                 </button>
 
                 <h2 class="font-forum text-3xl text-[var(--text-color)] mb-8 tracking-widest text-center">PRELIMINARY SCHEDULE</h2>
-               
+                
                 <div class="w-full flex flex-col gap-6">
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Friday, 7.10</h3>
-                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Sweet Like Cinnamon</strong> 🤎 ✨</p>
+                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
+                            <strong class="font-black text-sm">Theme:</strong>
+                            <strong class="font-black text-sm ml-1">Sweet Like Cinnamon</strong>
+                            <span class="text-lg flex items-center ml-2">🤎 ✨</span>
+                        </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
@@ -590,7 +594,11 @@
 
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Saturday, 7.11</h3>
-                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Hot Tamale</strong> 🌶️ 💃🏿</p>
+                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
+                            <strong class="font-black text-sm">Theme:</strong>
+                            <strong class="font-black text-sm ml-1">Hot Tamale</strong>
+                            <span class="text-lg flex items-center ml-2">🌶️ 💃🏿</span>
+                        </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
@@ -601,7 +609,11 @@
 
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Sunday, 7.12</h3>
-                        <p class="font-mulish text-[10px] tracking-widest uppercase mb-4 opacity-70 text-[var(--theme-label-color)]">Theme: <strong class="font-bold">Vanilla & Veils</strong> 💍 🍾</p>
+                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
+                            <strong class="font-black text-sm">Theme:</strong>
+                            <strong class="font-black text-sm ml-1">Vanilla & Veils</strong>
+                            <span class="text-lg flex items-center ml-2">💍 🍾</span>
+                        </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>X:00 PM:</span> <span>Event</span></li>
@@ -665,7 +677,7 @@
             const menuBackdrop = document.getElementById('menu-backdrop');
             const toggleBar = document.getElementById('theme-toggle-bar');
 
-            // Reset book state 
+            // Reset book state
             gsap.set("#menu-left-page", { rotationY: 180 });
             gsap.set("#book-spine", { opacity: 0 });
 
@@ -674,8 +686,8 @@
                 
                 // 1. Shift the SVG menu to exactly match the closed HTML cover position
                 gsap.to("#bar-menu", {
-                    x: 165, 
-                    y: 215, 
+                    x: 165,
+                    y: 215,
                     scale: 0.85,
                     transformOrigin: "50% 50%",
                     duration: 1.5,
@@ -697,11 +709,18 @@
                         gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
                         
                         // 3. Slowly crack open the physical book
-                        gsap.to("#menu-left-page", { 
-                            rotationY: 0, 
-                            duration: 3, 
-                            ease: "power3.inOut", 
-                            delay: 0.5 
+                        gsap.to("#menu-left-page", {
+                            rotationY: 0,
+                            duration: 3,
+                            ease: "power3.inOut",
+                            delay: 0.5,
+                            onComplete: () => {
+                                gsap.to("#tap-to-expand", {
+                                    opacity: 1, 
+                                    duration: 0.5, 
+                                    delay: 0.5 
+                                });
+                            }
                         });
                         
                         // Fade in the spine shadow to give it 3D depth
@@ -734,11 +753,11 @@
         document.addEventListener('DOMContentLoaded', () => {
                        
             const TEST_DATE = "2026-03-22T12:00:00-06:00";
-           
+            
             const realWorldInitTime = new Date().getTime();
             const simulatedInitTime = TEST_DATE ? new Date(TEST_DATE).getTime() : realWorldInitTime;
             const timeOffset = simulatedInitTime - realWorldInitTime;
-           
+            
             function getCurrentTime() {
                 return new Date().getTime() + timeOffset;
             }
@@ -773,7 +792,7 @@
                 const elSecs = document.getElementById('t-secs');
 
                 const candleBody = document.getElementById('candle-body');
-               
+                
                 function updateApplication() {
                     const dynamicNow = getCurrentTime();
                     const distance = targetTime - dynamicNow;
@@ -791,7 +810,7 @@
 
                         let elapsed = dynamicNow - startDate;
                         if (elapsed < 0) elapsed = 0;
-                       
+                        
                         let burnRatio = elapsed / totalDuration;
                         if (burnRatio > 1) burnRatio = 1;
 
@@ -805,7 +824,7 @@
                             phase2.classList.remove('hidden');
                             initPhase2GSAP();
                         }, 1000);
-                       
+                        
                         if (typeof interval !== 'undefined') clearInterval(interval);
                     }
                 }
@@ -829,13 +848,13 @@
 
                         tl.to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out" })
                           .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                         
+                          
                           .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
                           .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                         
+                          
                           .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
                           .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                         
+                          
                           .to("#knocker-ring", { duration: 0.3 })
 
                           .add("split")
@@ -844,17 +863,17 @@
                           .to("#knocker-wrapper", { opacity: 0, duration: 0.5 }, "split")
 
                           .to("#host-stand", { opacity: 1, duration: 1.2, ease: "power2.out" }, "split+=1.0")
-                         
+                          
                           .set("#speakeasy-door", { display: "none" })
                           .call(startMatchTimer);
                     });
                 }
-               
+                
                 let matchTimer;
                 let isMatchAnimating = false;
 
                 gsap.set("#single-match-wrapper", { svgOrigin: "134 654" });
-               
+                
                 gsap.set("#match-flame", { scale: 0, svgOrigin: "148 628" });
 
                 const matchWiggle = gsap.timeline({ paused: true, repeat: -1 })
@@ -870,7 +889,7 @@
                 }
 
                 const matchClickTarget = document.getElementById('single-match-wrapper');
-               
+                
                 if (matchClickTarget) {
                     matchClickTarget.addEventListener('click', () => {
                         if(isMatchAnimating) return;
@@ -878,7 +897,7 @@
 
                         clearTimeout(matchTimer);
                         matchWiggle.pause();
-                       
+                        
                         gsap.set("#single-match-wrapper", { rotation: 0, filter: "none" });
                         gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
 
@@ -889,23 +908,23 @@
                             .to("#match-flame", { rotation: 10, duration: 1.5, ease: "power2.inOut" }, "<")
 
                             .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.5, ease: "power4.in" })
-                           
+                            
                             .to("#match-flame", { opacity: 1, scale: 0.5, duration: 0.2, ease: "back.out(2)" })
-                           
+                            
                             .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: 2.5, ease: "power2.inOut", delay: 0.2 })
                             .to("#match-flame", { rotation: -15, duration: 2.5, ease: "power2.inOut" }, "<")
-                           
+                            
                             .add("burn")
                             .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 1, duration: 0.2 }, "burn")
                             .to(["#burn-hole-mask", "#burn-edge-ring", "#burn-edge-inner"], { y: -300, duration: 3.4, ease: "power1.in" }, "burn+=0.2")
-                           
+                            
                             .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.5, ease: "power2.in" }, "burn+=1.5")
                             .to("#match-flame", { rotation: 40, duration: 1.5, ease: "power2.in" }, "<")
-                           
+                            
                             .to("#cocktail-napkin", { opacity: 0, duration: 1 }, "burn+=2.5")
-                           
+                            
                             .to(["#burn-edge-ring", "#burn-edge-inner"], { opacity: 0, duration: 0.5 }, "burn+=3.2")
-                           
+                            
                             .set("#cocktail-napkin", { display: "none" }, "burn+=3.2")
                             
                             .call(showThemeModal, [], "burn+=5.0");
