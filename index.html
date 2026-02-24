@@ -319,7 +319,7 @@
                     </filter>
                     
                     <filter id="ragged-edge" color-interpolation-filters="linearRGB" primitiveUnits="userSpaceOnUse">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="0.5" result="noise" />
+                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="0.8" result="noise" />
                         <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
                     </filter>
 
@@ -342,7 +342,7 @@
                     <path d="M 0 320 L 0 350 L 30 350" fill="none" stroke="#5A1E23" stroke-width="3" />
                     <path d="M 220 320 L 220 350 L 190 350" fill="none" stroke="#5A1E23" stroke-width="3" />
                     
-                    <image href="https://via.placeholder.com/100x100/3D0C11/E9D6C7?text=BAR+MENU" x="60" y="40" width="100" height="100" />
+                    <image href="menulogo.png" x="60" y="40" width="100" height="100" />
                 </g>
                 
                 <g id="cocktail-napkin" transform="translate(110, 205) rotate(-12)" filter="url(#soft-shadow)">
@@ -355,7 +355,7 @@
                         <rect width="140" height="140" fill="#EDEBDE" filter="url(#paper-texture)" />
                         <rect x="6" y="6" width="128" height="128" fill="none" stroke="#800100" stroke-width="1.5" />
                         <rect x="10" y="10" width="120" height="120" fill="none" stroke="#800100" stroke-width="0.5" />
-                        <image href="https://via.placeholder.com/30/EDEBDE/800100?text=LOGO" x="96" y="96" width="30" height="30" />
+                        <image href="sun.png" x="96" y="96" width="30" height="30" />
                     </g>
 
                     <g id="burn-edges-group" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" opacity="0">
@@ -930,7 +930,7 @@ strikeTl
     // Napkin fade and modal presentation
     .to("#cocktail-napkin", { opacity: 0, duration: 1.2 }, "burn+=3.0")
     .set("#cocktail-napkin", { display: "none" })
-    .call(showThemeModal, [], "burn+=4.2");
+    .call(showThemeModal, [], "burn+=4.5");
                     });
                 }
             }
