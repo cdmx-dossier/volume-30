@@ -319,7 +319,7 @@
                     </filter>
                     
                     <filter id="ragged-edge" color-interpolation-filters="linearRGB" primitiveUnits="userSpaceOnUse">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="1" result="noise" />
+                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="0.5" result="noise" />
                         <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
                     </filter>
 
@@ -345,7 +345,7 @@
                     <image href="https://via.placeholder.com/100x100/3D0C11/E9D6C7?text=BAR+MENU" x="60" y="40" width="100" height="100" />
                 </g>
                 
-                <g id="cocktail-napkin" transform="translate(130, 160) rotate(-12)" filter="url(#soft-shadow)">
+                <g id="cocktail-napkin" transform="translate(110, 205) rotate(-12)" filter="url(#soft-shadow)">
                  <mask id="burn-mask">
                         <rect width="300" height="300" x="-50" y="-50" fill="white" />
                         <rect id="burn-hole-mask" x="-400" y="150" width="1000" height="1200" fill="black" transform="rotate(-45 140 140)" filter="url(#ragged-edge)" />
@@ -477,7 +477,7 @@
                 </g>
             </svg>
             
-            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-700">
+            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-[2100ms]">
                 <div class="ephemera-box p-6 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">
                     <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">THE SPICE OF LIFE</h2>
                     <div class="font-mulish text-sm mb-6 space-y-4 opacity-90 leading-relaxed text-[var(--text-color)]">
@@ -893,45 +893,44 @@
                         
                         gsap.set("#single-match-wrapper", { rotation: 0 });
                         gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
+// Adjusted, 3x length timeline
+const strikeTl = gsap.timeline();
 
-                        // Heavily reduced, rapid-fire timeline
-                        const strikeTl = gsap.timeline();
-
-                        strikeTl
-                            // Draw back fast
-                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 0.3, ease: "power2.inOut" })
-                            // Strike instantly
-                            .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.15, ease: "power4.in" })
-                            // Ignite flame
-                            .to("#match-flame", { opacity: 1, scale: 0.6, duration: 0.2, ease: "back.out(2)" })
-                            .add(() => {
-                                // Pure GSAP continuous flicker logic to dodge CSS conflicts
-                                gsap.to("#flame-flicker", {
-                                    scaleX: 1.05, 
-                                    scaleY: 0.95, 
-                                    rotation: 2,
-                                    duration: 0.12, 
-                                    yoyo: true, 
-                                    repeat: -1, 
-                                    ease: "sine.inOut"
-                                });
-                            }, "<")
-                            
-                            // Move to napkin quickly
-                            .to("#single-match-wrapper", { x: 148, y: -360, rotation: 15, duration: 0.6, ease: "power2.inOut", delay: 0.1 })
-                            
-                            // Burn sequence
-                            .add("burn")
-                            .to("#burn-edges-group", { opacity: 1, duration: 0.1 }, "burn")
-                            .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: 1.2, ease: "power1.in" }, "burn+=0.1")
-                            
-                            // Match drops away
-                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 0.6, ease: "power2.in" }, "burn+=0.4")
-                            
-                            // Napkin fade and modal presentation
-                            .to("#cocktail-napkin", { opacity: 0, duration: 0.4 }, "burn+=1.0")
-                            .set("#cocktail-napkin", { display: "none" })
-                            .call(showThemeModal, [], "burn+=1.2");
+strikeTl
+    // Draw back fast
+    .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 0.9, ease: "power2.inOut" })
+    // Strike instantly
+    .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.45, ease: "power4.in" })
+    // Ignite flame
+    .to("#match-flame", { opacity: 1, scale: 0.6, duration: 0.6, ease: "back.out(2)" })
+    .add(() => {
+        // Pure GSAP continuous flicker logic to dodge CSS conflicts
+        gsap.to("#flame-flicker", {
+            scaleX: 1.05, 
+            scaleY: 0.95, 
+            rotation: 2,
+            duration: 0.12, // Kept flicker speed natural
+            yoyo: true, 
+            repeat: -1, 
+            ease: "sine.inOut"
+        });
+    }, "<")
+    
+    // Move to napkin quickly
+    .to("#single-match-wrapper", { x: 128, y: -315, rotation: 15, duration: 1.8, ease: "power2.inOut", delay: 0.3 })
+    
+    // Burn sequence
+    .add("burn")
+    .to("#burn-edges-group", { opacity: 1, duration: 0.3 }, "burn")
+    .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: 3.6, ease: "power1.in" }, "burn+=0.3")
+    
+    // Match drops away
+    .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.8, ease: "power2.in" }, "burn+=1.2")
+    
+    // Napkin fade and modal presentation
+    .to("#cocktail-napkin", { opacity: 0, duration: 1.2 }, "burn+=3.0")
+    .set("#cocktail-napkin", { display: "none" })
+    .call(showThemeModal, [], "burn+=4.2");
                     });
                 }
             }
