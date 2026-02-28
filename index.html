@@ -287,7 +287,7 @@
                             Secure Your Spot by March 1
                         </button>
                     </a>
-                    <div class="font-mulish text-[10px] tracking-[0.3em] uppercase opacity-40 mt-6 mb-2">
+                    <div class="font-mulish text-[10px] tracking-[0.3em] uppercase opacity-40 mt-3 mb-6 pb-safe">
                         Est. 1996
                     </div>
                 </div>
@@ -296,7 +296,11 @@
 
         <div id="phase2" class="hidden absolute inset-0 w-full h-full z-20">
             
-            <svg id="host-stand" class="absolute inset-0 w-full h-full opacity-0" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+            <button id="skip-to-agenda-btn" onclick="skipToAgenda()" class="hidden absolute top-8 right-8 z-30 px-4 py-2 rounded-full border border-[#EDEBDE]/50 text-[#EDEBDE] font-mulish text-[10px] uppercase tracking-widest bg-black/40 backdrop-blur-sm hover:bg-[#EDEBDE] hover:text-black transition-colors shadow-lg">
+                Skip to Schedule
+            </button>
+            
+            <svg id="host-stand" class="absolute inset-0 w-full h-full" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <filter id="leather-texture">
                         <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
@@ -479,8 +483,9 @@
                 </g>
             </svg>
             
-            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-[2100ms]">
-                <div class="bg-[var(--surface-color)] relative p-6 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">                    <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">SPICE OF LIFE</h2>
+            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-[3000ms]">
+                <div class="bg-[var(--surface-color)] relative px-6 pt-10 pb-8 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">                    
+                    <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">SPICE OF LIFE</h2>
                     <div class="font-mulish text-sm mb-6 space-y-4 opacity-90 leading-relaxed text-[var(--text-color)]">
                         <p>For me, every birthday feels like the perfect excuse to pause, bring together my favorite people, and curate a beautiful summer weekend. My 30th, of course, is no different. The Spice of Life theme celebrates what makes life vibrant: the experiences you have, the people you’re with, and the foods you try along the way.</p>
                         <p>Here’s what to expect:</p>
@@ -511,24 +516,30 @@
                     <div class="absolute right-0 w-1/2 h-full static-paper rounded-r-md border-t border-r border-b border-[#CBB6A7] p-3 pb-2 flex flex-col shadow-inner z-10">
                         <h3 class="font-forum text-[14px] leading-tight text-center mt-3 mb-2 tracking-[0.2em] border-b border-[#150C0C]/20 pb-2 text-[#150C0C]">PRELIMINARY<br>SCHEDULE</h3>
                         
-                        <div class="flex-1 flex flex-col justify-evenly text-[#150C0C] mb-2">
-                            <div class="text-center">
+                        <div class="flex-1 flex flex-col justify-evenly text-[#150C0C] mb-2 w-full overflow-hidden">
+                            <div class="text-center w-full">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Friday 7.10</strong>
-                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Sweet Like Cinnamon</p>
+                                <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
+                                    <span class="truncate">Sweet Like Cinnamon</span>
+                                </p>
                                 <div class="mt-0.5 text-[12px]">🤎 ✨</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
-                            <div class="text-center">
+                            <div class="text-center w-full">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Saturday 7.11</strong>
-                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Hot Tamale</p>
+                                <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
+                                    <span class="truncate">Hot Tamale</span>
+                                </p>
                                 <div class="mt-0.5 text-[12px]">🌶️ 💃🏿</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
-                            <div class="text-center">
+                            <div class="text-center w-full">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Sunday 7.12</strong>
-                                <p class="font-mulish text-[10px] font-bold uppercase tracking-wider opacity-90">Vanilla & Veils</p>
+                                <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
+                                    <span class="truncate">Vanilla & Veils</span>
+                                </p>
                                 <div class="mt-0.5 text-[12px]">💍 🍾</div>
                             </div>
                         </div>
@@ -583,10 +594,10 @@
                 <div class="w-full flex flex-col gap-6">
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Friday, 7.10</h3>
-                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
-                            <strong class="font-black text-sm">Theme:</strong>
-                            <strong class="font-black text-sm ml-1">Sweet Like Cinnamon</strong>
-                            <span class="text-lg flex items-center ml-2">🤎 ✨</span>
+                        <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
+                            <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
+                            <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Sweet Like Cinnamon</strong>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🤎 ✨</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>1:00 PM</span> <span>Lunch + Exploring CDMX</span></li>
@@ -598,10 +609,10 @@
 
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Saturday, 7.11</h3>
-                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
-                            <strong class="font-black text-sm">Theme:</strong>
-                            <strong class="font-black text-sm ml-1">Hot Tamale</strong>
-                            <span class="text-lg flex items-center ml-2">🌶️ 💃🏿</span>
+                        <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
+                            <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
+                            <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Hot Tamale</strong>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🌶️ 💃🏿</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>11:00 AM</span> <span>Brunch</span></li>
@@ -613,10 +624,10 @@
 
                     <div class="ephemera-box p-5 rounded border border-[var(--accent-color)]/30 shadow-lg">
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Sunday, 7.12</h3>
-                        <p class="flex items-center font-mulish text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1">
-                            <strong class="font-black text-sm">Theme:</strong>
-                            <strong class="font-black text-sm ml-1">Vanilla & Veils</strong>
-                            <span class="text-lg flex items-center ml-2">💍 🍾</span>
+                        <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
+                            <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
+                            <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Vanilla & Veils</strong>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">💍 🍾</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>11:00 AM</span> <span>Brunch</span></li>
@@ -628,9 +639,12 @@
 
                 <div class="w-full mt-8 mb-4">
                     <p class="text-center font-mulish text-[10px] italic text-[var(--text-color)] opacity-70 mb-2">*Details are subject to change</p>
-                    <button id="unlock-btn" class="w-full flex items-center justify-center py-4 leading-none rounded-md border border-[var(--text-color)] text-[var(--text-color)] font-mulish text-sm uppercase tracking-widest transition-all hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] shadow-lg ephemera-box opacity-70">
-                        Full details unlocked on April 1
-                    </button>
+                    
+                    <a id="unlock-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full pointer-events-none">
+                        <button id="unlock-btn" class="w-full flex items-center justify-center py-4 leading-none rounded-md border border-[var(--text-color)] text-[var(--text-color)] font-mulish text-[10px] sm:text-sm uppercase tracking-widest transition-all hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] shadow-lg ephemera-box opacity-70">
+                            Full details unlocked on April 1
+                        </button>
+                    </a>
                 </div>
             </div>
 
@@ -670,7 +684,7 @@
             setTimeout(() => modal.classList.remove('opacity-0'), 50);
         }
 
-        function closeThemeModalAndShowPhysicalMenu() {
+        function closeThemeModalAndShowPhysicalMenu(instant = false) {
             const modal = document.getElementById('theme-modal');
             modal.classList.add('opacity-0');
             
@@ -684,48 +698,74 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 
-                gsap.to("#bar-menu", {
-                    x: 165,
-                    y: 215,
-                    scale: 0.85,
-                    transformOrigin: "50% 50%",
-                    duration: 1.5,
-                    ease: "power3.inOut",
-                    onComplete: () => {
-                        gsap.set("#bar-menu", { opacity: 0 });
-                        physicalMenuContainer.classList.remove('hidden');
-                        
-                        menuBackdrop.classList.remove('hidden');
-                        setTimeout(() => {
-                            menuBackdrop.classList.remove('opacity-0');
-                        }, 20);
+                // Fade out the SVG scene fully
+                gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
+                
+                // Reveal the physical menu overlay
+                physicalMenuContainer.classList.remove('hidden');
+                menuBackdrop.classList.remove('hidden');
+                toggleBar.classList.remove('hidden');
+                
+                // Fade in menu cleanly
+                gsap.fromTo(physicalMenuContainer, 
+                    { opacity: 0, scale: 0.95 }, 
+                    { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" }
+                );
+                
+                setTimeout(() => {
+                    menuBackdrop.classList.remove('opacity-0');
+                }, 20);
 
-                        toggleBar.classList.remove('hidden');
-                        
-                        gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
-                        
-                        gsap.to("#menu-left-page", {
-                            rotationY: 0,
-                            duration: 3,
-                            ease: "power3.inOut",
-                            delay: 0.5,
-                            onComplete: () => {
-                                gsap.to("#tap-to-expand", {
-                                    opacity: 1, 
-                                    duration: 0.5, 
-                                    delay: 0.5 
-                                });
-                            }
-                        });
-                        
-                        gsap.to("#book-spine", {
-                            opacity: 1,
-                            duration: 1.5,
-                            delay: 2.0
+                gsap.to("#menu-left-page", {
+                    rotationY: 0,
+                    duration: 3,
+                    ease: "power3.inOut",
+                    delay: 1.0,
+                    onComplete: () => {
+                        gsap.to("#tap-to-expand", {
+                            opacity: 1, 
+                            duration: 0.5, 
+                            delay: 0.5 
                         });
                     }
                 });
-            }, 2100);
+                
+                gsap.to("#book-spine", {
+                    opacity: 1,
+                    duration: 1.5,
+                    delay: 2.5
+                });
+                
+            }, 3000); // Waits for the new, slower 3000ms modal fade out!
+        }
+
+        function skipToAgenda() {
+            // Instantly stop all Phase 2 animations currently running
+            gsap.killTweensOf("*");
+            
+            // Hide ONLY the specific background elements, not the entire phase2 container
+            gsap.set("#host-stand, #speakeasy-door", { display: "none" });
+            document.getElementById('theme-modal').classList.add('hidden');
+            document.getElementById('skip-to-agenda-btn').classList.add('hidden');
+            
+            // Show the physical HTML menu directly in its completely "opened" state 
+            const physicalMenuContainer = document.getElementById('physical-menu-container');
+            const menuBackdrop = document.getElementById('menu-backdrop');
+            const toggleBar = document.getElementById('theme-toggle-bar');
+            
+            physicalMenuContainer.classList.remove('hidden');
+            gsap.set(physicalMenuContainer, { opacity: 1, scale: 1 }); // Force GSAP to reveal the container
+            
+            menuBackdrop.classList.remove('hidden');
+            menuBackdrop.classList.remove('opacity-0');
+            toggleBar.classList.remove('hidden');
+            
+            gsap.set("#menu-left-page", { rotationY: 0 });
+            gsap.set("#book-spine", { opacity: 1 });
+            gsap.set("#tap-to-expand", { opacity: 1 });
+            
+            // Automatically launch the detailed modal
+            openDetailedSchedule();
         }
 
         function openDetailedSchedule() {
@@ -746,7 +786,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
                        
-            const TEST_DATE = "2026-03-22T12:00:00-06:00";
+            const TEST_DATE = null;
             
             const realWorldInitTime = new Date().getTime();
             const simulatedInitTime = TEST_DATE ? new Date(TEST_DATE).getTime() : realWorldInitTime;
@@ -761,8 +801,16 @@
             const now = getCurrentTime();
 
             if (now >= aprilDate) {
-                document.getElementById('unlock-btn').innerText = "Unlock Menu";
-                document.getElementById('unlock-btn').classList.remove('opacity-70');
+                const unlockBtn = document.getElementById('unlock-btn');
+                const unlockLink = document.getElementById('unlock-link');
+                const skipBtn = document.getElementById('skip-to-agenda-btn');
+                
+                unlockBtn.innerText = "Unlock Full Details";
+                unlockBtn.classList.remove('opacity-70');
+                unlockLink.classList.remove('pointer-events-none');
+                unlockLink.href = "https://cdmx-dossier.my.canva.site/";
+                
+                if (skipBtn) skipBtn.classList.remove('hidden');
             }
 
             const phase1 = document.getElementById('phase1');
@@ -830,37 +878,54 @@
             function initPhase2GSAP() {
                 const knockerWrapper = document.getElementById('knocker-wrapper');
                 let isDoorAnimating = false;
+                
+                const now = getCurrentTime();
+                const aprilDate = new Date("2026-04-01T00:00:00-06:00").getTime();
 
-                if (knockerWrapper) {
-                    knockerWrapper.addEventListener('click', () => {
-                        if(isDoorAnimating) return;
-                        isDoorAnimating = true;
+                if (now >= aprilDate) {
+                    // April 1st logic: Start slightly open, open automatically without knocker
+                    gsap.set("#knocker-wrapper", { display: "none" });
+                    gsap.set("#door-left", { x: -20 }); 
+                    gsap.set("#door-right", { x: 20 });
+                    
+                    setTimeout(() => {
+                        gsap.to("#door-left", { x: -250, duration: 2, ease: "power2.inOut" });
+                        gsap.to("#door-right", { x: 250, duration: 2, ease: "power2.inOut" });
+                        gsap.set("#speakeasy-door", { display: "none", delay: 2 });
+                        startMatchTimer();
+                    }, 500);
 
-                        const tl = gsap.timeline();
+                } else {
+                    // Standard logic (before April 1st): wait for knocker click
+                    if (knockerWrapper) {
+                        knockerWrapper.addEventListener('click', () => {
+                            if(isDoorAnimating) return;
+                            isDoorAnimating = true;
 
-                        gsap.set("#knocker-ring", { transformOrigin: "50% -10px" });
+                            const tl = gsap.timeline();
 
-                        tl.to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out" })
-                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                          
-                          .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
-                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                          
-                          .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
-                          .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
-                          
-                          .to("#knocker-ring", { duration: 0.3 })
+                            gsap.set("#knocker-ring", { transformOrigin: "50% -10px" });
 
-                          .add("split")
-                          .to("#door-left", { x: -250, duration: 1.8, ease: "power3.inOut" }, "split")
-                          .to("#door-right", { x: 250, duration: 1.8, ease: "power3.inOut" }, "split")
-                          .to("#knocker-wrapper", { opacity: 0, duration: 0.5 }, "split")
+                            tl.to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out" })
+                              .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                              
+                              .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
+                              .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                              
+                              .to("#knocker-ring", { scaleY: 0.72, y: 8, duration: 0.15, ease: "power2.out", delay: 0.1 })
+                              .to("#knocker-ring", { scaleY: 1, y: 0, duration: 0.1, ease: "power2.in" })
+                              
+                              .to("#knocker-ring", { duration: 0.3 })
 
-                          .to("#host-stand", { opacity: 1, duration: 1.2, ease: "power2.out" }, "split+=1.0")
-                          
-                          .set("#speakeasy-door", { display: "none" })
-                          .call(startMatchTimer);
-                    });
+                              .add("split")
+                              .to("#door-left", { x: -250, duration: 1.8, ease: "power3.inOut" }, "split")
+                              .to("#door-right", { x: 250, duration: 1.8, ease: "power3.inOut" }, "split")
+                              .to("#knocker-wrapper", { opacity: 0, duration: 0.5 }, "split")
+                              
+                              .set("#speakeasy-door", { display: "none" })
+                              .call(startMatchTimer);
+                        });
+                    }
                 }
                 
                 let matchTimer;
@@ -895,44 +960,45 @@
                         
                         gsap.set("#single-match-wrapper", { rotation: 0 });
                         gsap.set("#single-match-wrapper", { svgOrigin: "148 628" });
-// Adjusted, 3x length timeline
-const strikeTl = gsap.timeline();
 
-strikeTl
-    // Draw back fast
-    .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 0.9, ease: "power2.inOut" })
-    // Strike instantly
-    .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.45, ease: "power4.in" })
-    // Ignite flame
-    .to("#match-flame", { opacity: 1, scale: 0.6, duration: 0.6, ease: "back.out(2)" })
-    .add(() => {
-        // Pure GSAP continuous flicker logic to dodge CSS conflicts
-        gsap.to("#flame-flicker", {
-            scaleX: 1.05, 
-            scaleY: 0.95, 
-            rotation: 2,
-            duration: 0.12, // Kept flicker speed natural
-            yoyo: true, 
-            repeat: -1, 
-            ease: "sine.inOut"
-        });
-    }, "<")
-    
-    // Move to napkin quickly
-    .to("#single-match-wrapper", { x: 128, y: -315, rotation: 15, duration: 1.8, ease: "power2.inOut", delay: 0.3 })
-    
-    // Burn sequence
-    .add("burn")
-    .to("#burn-edges-group", { opacity: 1, duration: 0.3 }, "burn")
-    .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: 3.6, ease: "power1.in" }, "burn+=0.3")
-    
-    // Match drops away
-    .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.8, ease: "power2.in" }, "burn+=1.2")
-    
-    // Napkin fade and modal presentation
-    .to("#cocktail-napkin", { opacity: 0, duration: 1.2 }, "burn+=2.8")
-    .set("#cocktail-napkin", { display: "none" })
-    .call(showThemeModal, [], "burn+=4.5");
+                        // Adjusted, 3x length timeline
+                        const strikeTl = gsap.timeline();
+
+                        strikeTl
+                            // Draw back fast
+                            .to("#single-match-wrapper", { x: -33, y: -8, rotation: -10, duration: 0.9, ease: "power2.inOut" })
+                            // Strike instantly
+                            .to("#single-match-wrapper", { x: -43, y: 42, duration: 0.45, ease: "power4.in" })
+                            // Ignite flame
+                            .to("#match-flame", { opacity: 1, scale: 0.6, duration: 0.6, ease: "back.out(2)" })
+                            .add(() => {
+                                // Pure GSAP continuous flicker logic to dodge CSS conflicts
+                                gsap.to("#flame-flicker", {
+                                    scaleX: 1.05, 
+                                    scaleY: 0.95, 
+                                    rotation: 2,
+                                    duration: 0.12, // Kept flicker speed natural
+                                    yoyo: true, 
+                                    repeat: -1, 
+                                    ease: "sine.inOut"
+                                });
+                            }, "<")
+                            
+                            // Move to napkin quickly
+                            .to("#single-match-wrapper", { x: 128, y: -315, rotation: 15, duration: 1.8, ease: "power2.inOut", delay: 0.3 })
+                            
+                            // Burn sequence
+                            .add("burn")
+                            .to("#burn-edges-group", { opacity: 1, duration: 0.3 }, "burn")
+                            .to(["#burn-hole-mask", "#burn-edges-group"], { y: -300, duration: 3.6, ease: "power1.in" }, "burn+=0.3")
+                            
+                            // Match drops away
+                            .to("#single-match-wrapper", { y: 250, rotation: -40, duration: 1.8, ease: "power2.in" }, "burn+=1.2")
+                            
+                            // Napkin fade and modal presentation
+                            .to("#cocktail-napkin", { opacity: 0, duration: 1.2 }, "burn+=2.8")
+                            .set("#cocktail-napkin", { display: "none" })
+                            .call(showThemeModal, [], "burn+=4.5");
                     });
                 }
             }
