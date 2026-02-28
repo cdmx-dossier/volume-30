@@ -235,7 +235,8 @@
 
     <main class="min-h-[100dvh] w-full max-w-md mx-auto overflow-hidden relative shadow-2xl bg-[var(--bg-color)] flex flex-col items-center">
 
-        <div id="phase1" class="hidden flex flex-col justify-between items-center py-8 px-6 z-10 w-full h-[100dvh] absolute inset-0 transition-opacity duration-1000">
+        <div id="phase1" class="hidden flex flex-col justify-between items-center py-8 px-6 z-10 w-full h-full absolute inset-0 overflow-y-auto transition-opacity duration-1000">
+
             <div class="text-center mt-4 w-full">
                 <h1 class="font-forum text-3xl sm:text-4xl tracking-widest text-[var(--accent-color)] leading-tight">NIMI'S 30TH<br>BIRTHDAY</h1>
                 <p class="font-mulish text-xs tracking-widest uppercase mt-4 opacity-60">Mexico City</p>
@@ -287,9 +288,10 @@
                             Secure Your Spot by March 1
                         </button>
                     </a>
-                    <div class="font-mulish text-[10px] tracking-[0.3em] uppercase opacity-40 mt-3 mb-6 pb-safe">
-                        Est. 1996
+                    <div class="font-mulish text-[10px] tracking-[0.3em] uppercase opacity-40 mt-3 mb-8 pb-[env(safe-area-inset-bottom)]">
+                     Est. 1996
                     </div>
+
                 </div>
             </div>
         </div>
