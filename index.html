@@ -76,11 +76,11 @@
             --theme-label-color: #150C0C;
         }
         .theme-everything-nice {
-            --bg-color: #E6E0D0;
-            --surface-color: #CBB6A7;
-            --accent-color: #B18177;
-            --text-color: #363936;
-            --theme-label-color: #363936;
+            --bg-color: #FBF8F3;
+            --surface-color: #BCC8D8;
+            --accent-color: #97A8BE;
+            --text-color: #465063;
+            --theme-label-color: #2E3A4A;
         }
 
         body, .ephemera-box, button, h1, h2, h3, p, div:not(.static-paper):not(#menu-cover), svg path {
@@ -165,7 +165,8 @@
             top: 5px;
             left: 10px;
             width: 6px;
-            height: 40px;
+            height: min(40px, calc(100% - 10px));
+            max-height: calc(100% - 10px);
             background: #6e4228;
             border-radius: 4px 4px 5px 5px;
             box-shadow: 1px 2px 4px rgba(0,0,0,0.6), inset -1px -1px 2px rgba(0,0,0,0.2);
@@ -302,7 +303,7 @@
                 Skip to Schedule
             </button>
             
-            <svg id="host-stand" class="absolute inset-0 w-full h-full" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+            <svg id="host-stand-bg" class="absolute inset-0 w-full h-full" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <filter id="leather-texture">
                         <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
@@ -338,7 +339,9 @@
                 
                 <rect width="400" height="800" fill="#0c0705" />
                 <rect width="400" height="800" fill="#1c0f0a" opacity="0.4" filter="url(#leather-texture)" />
+            </svg>
 
+            <svg id="host-stand" class="absolute inset-0 w-full h-full" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
                 <g id="bar-menu" transform="translate(60, 200)" filter="url(#item-shadow)">
                     <rect width="220" height="350" rx="6" fill="#3D0C11" filter="url(#leather-texture)" />
                     <rect x="8" y="8" width="204" height="334" rx="4" fill="none" stroke="#5A1E23" stroke-width="1.5" stroke-dasharray="4 4" />
@@ -347,7 +350,7 @@
                     <path d="M 0 320 L 0 350 L 30 350" fill="none" stroke="#5A1E23" stroke-width="3" />
                     <path d="M 220 320 L 220 350 L 190 350" fill="none" stroke="#5A1E23" stroke-width="3" />
                     
-                    <image href="menulogo.png" x="60" y="40" width="100" height="100" />
+                    <image href="menulogo.png" x="60" y="40" width="115" height="115" />
                 </g>
                 
                 <g id="cocktail-napkin" transform="translate(110, 205) rotate(-12)" filter="url(#soft-shadow)">
@@ -485,16 +488,16 @@
                 </g>
             </svg>
             
-            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-[3000ms]">
+            <div id="theme-modal" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
                 <div class="bg-[var(--surface-color)] relative px-6 pt-10 pb-8 rounded-lg w-full max-w-sm shadow-2xl border border-[var(--accent-color)]/30 max-h-[85vh] overflow-y-auto">                    
                     <h2 class="font-forum text-2xl text-[var(--text-color)] mb-4 text-center tracking-widest">SPICE OF LIFE</h2>
                     <div class="font-mulish text-sm mb-6 space-y-4 opacity-90 leading-relaxed text-[var(--text-color)]">
-                        <p>For me, every birthday feels like the perfect excuse to pause, bring together my favorite people, and curate a beautiful summer weekend. My 30th, of course, is no different. The Spice of Life theme celebrates what makes life vibrant: the experiences you have, the people you’re with, and the foods you try along the way.</p>
+                        <p>Every birthday feels like the perfect excuse to pause, bring together my favorite people, and curate a beautiful summer weekend. My 30th, of course, is no different. The Spice of Life theme celebrates what makes life vibrant: the experiences you have, the people you’re with, and the foods you try along the way.</p>
                         <p>Here’s what to expect:</p>
                         <ul class="list-disc pl-4 space-y-2">
-                            <li><strong class="text-[var(--theme-label-color)]">A Little Heat:</strong> Thirty is a milestone that deserves to be felt. Let’s give it everything it deserves. </li>
-                            <li><strong class="text-[var(--theme-label-color)]">Variety:</strong> The best celebrations have range. This weekend will have a moment for every mood, from slow and sentimental to loud and electric.</li>
-                            <li><strong class="text-[var(--theme-label-color)]">Rich:</strong> For me a birthday is never just a birthday. It’s the opportunity to celebrate how full my life has been, because I’ve shared it with the right people. So, expect a full agenda - thoughtfully paced.</li>
+                            <li><strong class="text-[var(--theme-label-color)]">A Little Heat:</strong> Thirty is a milestone that deserves to be felt. We're going to give it the high-energy weekend it deserves. </li>
+                            <li><strong class="text-[var(--theme-label-color)]">Variety:</strong> The best celebrations have range. This weekend will have a moment for every mood, from slow and wholesome to loud and electric.</li>
+                            <li><strong class="text-[var(--theme-label-color)]">Rich:</strong> A birthday is never just a birthday. It’s the opportunity to celebrate how full my life has been! So, expect a full agenda - thoughtfully paced.</li>
                         </ul>
                         <p>Mexico City is the perfect backdrop for this weekend - one of my favorite cities, with so many experiences worth savoring. I’m so excited to share those experiences with you.</p>
                         <p>So, here's to 30, and here's to everything that makes this life so good!</p>
@@ -509,11 +512,10 @@
                 </div>
             </div>
 
-            <div id="menu-backdrop" class="hidden absolute inset-0 z-20 bg-[var(--bg-color)] opacity-0 transition-opacity duration-1000 pointer-events-none"></div>
 
-            <div id="physical-menu-container" class="hidden absolute inset-0 z-30 flex items-center justify-center p-6" style="perspective: 1500px;">
-                
-                <div onclick="openDetailedSchedule()" class="relative w-full max-w-[360px] h-[290px] shadow-book transition-transform hover:scale-[1.02] duration-300 cursor-pointer group mx-auto">
+            <div id="physical-menu-container" class="hidden absolute z-30" style="perspective: 1500px;">
+
+                <div id="menu-book" onclick="openDetailedSchedule()" class="relative shadow-book transition-transform hover:scale-[1.02] duration-300 cursor-pointer group">
                     
                     <div class="absolute right-0 w-1/2 h-full static-paper rounded-r-md border-t border-r border-b border-[#CBB6A7] p-3 pb-2 flex flex-col shadow-inner z-10">
                         <h3 class="font-forum text-[14px] leading-tight text-center mt-3 mb-2 tracking-[0.2em] border-b border-[#150C0C]/20 pb-2 text-[#150C0C]">PRELIMINARY<br>SCHEDULE</h3>
@@ -524,16 +526,16 @@
                                 <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
                                     <span class="truncate">Sweet Like Cinnamon</span>
                                 </p>
-                                <div class="mt-0.5 text-[12px]">🤎 ✨</div>
+                                <div class="mt-0.5 text-[12px]">🤎✨</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
                             <div class="text-center w-full">
                                 <strong class="block font-forum text-[13px] uppercase tracking-widest text-[#800100] mb-0.5">Saturday 7.11</strong>
                                 <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
-                                    <span class="truncate">Hot Tamale</span>
+                                    <span class="truncate">En Fuego</span>
                                 </p>
-                                <div class="mt-0.5 text-[12px]">🌶️ 💃🏿</div>
+                                <div class="mt-0.5 text-[12px]">🌶️💃🏿</div>
                                 <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                             
@@ -542,7 +544,8 @@
                                 <p class="flex items-center justify-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-90 mx-auto w-full">
                                     <span class="truncate">Vanilla & Veils</span>
                                 </p>
-                                <div class="mt-0.5 text-[12px]">💍 🍾</div>
+                                <div class="mt-0.5 text-[12px]">💍🍾</div>
+                                <div class="w-4 h-[1px] bg-[#150C0C]/20 mx-auto mt-1"></div>
                             </div>
                         </div>
 
@@ -573,7 +576,7 @@
                             <div class="absolute bottom-0 left-0 w-[24px] h-[24px] border-b-[2.5px] border-l-[2.5px] border-[#5A1E23] rounded-bl-md pointer-events-none"></div>
                             <div class="absolute bottom-0 right-0 w-[24px] h-[24px] border-b-[2.5px] border-r-[2.5px] border-[#5A1E23] rounded-br-md pointer-events-none"></div>
                             
-                            <img src="menulogo.png" class="absolute top-[30px] w-[80px] h-[80px]" />
+                            <img src="menulogo.png" class="absolute left-1/2 -translate-x-1/2 top-[9.29%] w-[52.27%] h-[32.86%] object-contain" />
                         </div>
                     </div>
 
@@ -599,13 +602,13 @@
                         <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
                             <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
                             <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Sweet Like Cinnamon</strong>
-                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🤎 ✨</span>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🤎✨</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
-                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>1:00 PM</span> <span>Lunch + Exploring CDMX</span></li>
+                            <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>1:30 PM</span> <span>Lunch + Artisan Market</span></li>
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>5:30 PM</span> <span>Churro Making Class</span></li>
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>8:00 PM</span> <span>Dinner</span></li>
-                            <li class="flex justify-between"><span>10:00 PM</span> <span>Night In</span></li>
+                            <li class="flex justify-between"><span>10:00 PM</span> <span>Night In & Games</span></li>
                         </ul>
                     </div>
 
@@ -613,8 +616,8 @@
                         <h3 class="font-forum text-xl text-[var(--text-color)]">Saturday, 7.11</h3>
                         <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
                             <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
-                            <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Hot Tamale</strong>
-                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🌶️ 💃🏿</span>
+                            <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">En Fuego</strong>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">🌶️💃🏿</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>11:00 AM</span> <span>Brunch</span></li>
@@ -629,7 +632,7 @@
                         <p class="flex items-center flex-nowrap whitespace-nowrap overflow-hidden font-mulish text-[10px] sm:text-xs tracking-widest uppercase mb-5 opacity-90 text-[var(--theme-label-color)] mt-1 w-full">
                             <strong class="font-black text-[10px] sm:text-sm shrink-0">Theme:</strong>
                             <strong class="font-black text-[10px] sm:text-sm ml-1 shrink truncate">Vanilla & Veils</strong>
-                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">💍 🍾</span>
+                            <span class="text-sm sm:text-lg flex items-center ml-1 shrink-0">💍🍾</span>
                         </p>
                         <ul class="font-mulish text-sm space-y-2 opacity-90 text-[var(--text-color)]">
                             <li class="flex justify-between border-b border-[var(--text-color)]/10 pb-1"><span>11:00 AM</span> <span>Brunch</span></li>
@@ -644,7 +647,7 @@
                     
                     <a id="unlock-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full pointer-events-none">
                         <button id="unlock-btn" class="w-full flex items-center justify-center py-4 leading-none rounded-md border border-[var(--text-color)] text-[var(--text-color)] font-mulish text-[10px] sm:text-sm uppercase tracking-widest transition-all hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] shadow-lg ephemera-box opacity-70">
-                            Full details unlocked on April 1
+                            Full details unlocked on March 15
                         </button>
                     </a>
                 </div>
@@ -683,90 +686,141 @@
         function showThemeModal() {
             const modal = document.getElementById('theme-modal');
             modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 50);
+            gsap.fromTo(modal, 
+                { opacity: 0, y: 15 }, 
+                { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }
+            );
         }
 
         function closeThemeModalAndShowPhysicalMenu(instant = false) {
             const modal = document.getElementById('theme-modal');
-            modal.classList.add('opacity-0');
-            
+            gsap.to(modal, { opacity: 0, duration: 1, ease: "power2.inOut" });
+
             const physicalMenuContainer = document.getElementById('physical-menu-container');
-            const menuBackdrop = document.getElementById('menu-backdrop');
             const toggleBar = document.getElementById('theme-toggle-bar');
+            const menuBook = document.getElementById('menu-book');
+            const barMenuEl = document.getElementById('bar-menu');
+            const phase2El = document.getElementById('phase2');
 
             gsap.set("#menu-left-page", { rotationY: 180 });
             gsap.set("#book-spine", { opacity: 0 });
+            gsap.set("#tap-to-expand", { opacity: 0 });
+
+            // Single BCR read before any animation
+            const phase2Rect = phase2El.getBoundingClientRect();
+            const barMenuRect = barMenuEl.getBoundingClientRect();
+
+            const W = phase2Rect.width;
+            const H = phase2Rect.height;
+            const margin = 16;
+
+            const svgCX = phase2Rect.left + W / 2;
+            const svgCY = phase2Rect.top + H / 2;
+            const barMenuMidY = barMenuRect.top + barMenuRect.height / 2;
+
+            // Right page fills right half minus margin; derive scale from that
+            const targetPageWidth = W / 2 - margin;
+            const zoomScale = targetPageWidth / barMenuRect.width;
+
+            // Translate so bar-menu LEFT edge lands exactly at horizontal center,
+            // leaving room on the left for the menu to fully open
+            const tx = zoomScale * (svgCX - barMenuRect.left);
+            const ty = zoomScale * (svgCY - barMenuMidY);
+
+            // HTML menu dimensions — all derived, no post-zoom BCR needed
+            const bookHeight = barMenuRect.height * zoomScale;
+            const fullBookWidth = targetPageWidth * 2;
+            const bookLeft = margin;
+            const bookTop = (H - bookHeight) / 2;
 
             setTimeout(() => {
                 modal.classList.add('hidden');
-                
-                // Fade out the SVG scene fully
-                gsap.to("#host-stand", { opacity: 0, duration: 1.5 });
-                
-                // Reveal the physical menu overlay
-                physicalMenuContainer.classList.remove('hidden');
-                menuBackdrop.classList.remove('hidden');
-                toggleBar.classList.remove('hidden');
-                
-                // Fade in menu cleanly
-                gsap.fromTo(physicalMenuContainer, 
-                    { opacity: 0, scale: 0.95 }, 
-                    { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" }
-                );
-                
-                setTimeout(() => {
-                    menuBackdrop.classList.remove('opacity-0');
-                }, 20);
 
-                gsap.to("#menu-left-page", {
-                    rotationY: 0,
-                    duration: 3,
-                    ease: "power3.inOut",
-                    delay: 1.0,
+                gsap.to("#host-stand", {
+                    scale: zoomScale,
+                    x: tx,
+                    y: ty,
+                    transformOrigin: "50% 50%",
+                    duration: 1.2,
+                    ease: "power2.inOut",
                     onComplete: () => {
-                        gsap.to("#tap-to-expand", {
-                            opacity: 1, 
-                            duration: 0.5, 
-                            delay: 0.5 
+                        gsap.set("#bar-menu", { opacity: 0 });
+
+                        menuBook.style.width = fullBookWidth + 'px';
+                        menuBook.style.height = bookHeight + 'px';
+
+                        physicalMenuContainer.style.left = bookLeft + 'px';
+                        physicalMenuContainer.style.top = bookTop + 'px';
+                        physicalMenuContainer.style.right = 'auto';
+                        physicalMenuContainer.style.bottom = 'auto';
+                        physicalMenuContainer.style.width = fullBookWidth + 'px';
+                        physicalMenuContainer.style.height = bookHeight + 'px';
+
+                        physicalMenuContainer.classList.remove('hidden');
+                        toggleBar.classList.remove('hidden');
+
+                        gsap.to("#menu-left-page", {
+                            rotationY: 0,
+                            duration: 3,
+                            ease: "power3.inOut",
+                            delay: 0.3,
+                            onComplete: () => {
+                                gsap.to("#tap-to-expand", { opacity: 1, duration: 0.5, delay: 0.5 });
+                            }
                         });
+
+                        gsap.to("#book-spine", { opacity: 1, duration: 1.5, delay: 1.8 });
                     }
                 });
-                
-                gsap.to("#book-spine", {
-                    opacity: 1,
-                    duration: 1.5,
-                    delay: 2.5
-                });
-                
-            }, 3000); // Waits for the new, slower 3000ms modal fade out!
+            }, 3000);
         }
 
         function skipToAgenda() {
-            // Instantly stop all Phase 2 animations currently running
             gsap.killTweensOf("*");
-            
-            // Hide ONLY the specific background elements, not the entire phase2 container
+
+            // BCR read must happen before hiding host-stand
+            const barMenuEl = document.getElementById('bar-menu');
+            const phase2El = document.getElementById('phase2');
+            const phase2Rect = phase2El.getBoundingClientRect();
+            const barMenuRect = barMenuEl.getBoundingClientRect();
+
+            const W = phase2Rect.width;
+            const H = phase2Rect.height;
+            const margin = 16;
+
+            const targetPageWidth = W / 2 - margin;
+            const zoomScale = targetPageWidth / barMenuRect.width;
+            const bookHeight = barMenuRect.height * zoomScale;
+            const fullBookWidth = targetPageWidth * 2;
+            const bookLeft = margin;
+            const bookTop = (H - bookHeight) / 2;
+
             gsap.set("#host-stand, #speakeasy-door", { display: "none" });
             document.getElementById('theme-modal').classList.add('hidden');
             document.getElementById('skip-to-agenda-btn').classList.add('hidden');
-            
-            // Show the physical HTML menu directly in its completely "opened" state 
+
             const physicalMenuContainer = document.getElementById('physical-menu-container');
-            const menuBackdrop = document.getElementById('menu-backdrop');
             const toggleBar = document.getElementById('theme-toggle-bar');
-            
+            const menuBook = document.getElementById('menu-book');
+
+            menuBook.style.width = fullBookWidth + 'px';
+            menuBook.style.height = bookHeight + 'px';
+
+            physicalMenuContainer.style.left = bookLeft + 'px';
+            physicalMenuContainer.style.top = bookTop + 'px';
+            physicalMenuContainer.style.right = 'auto';
+            physicalMenuContainer.style.bottom = 'auto';
+            physicalMenuContainer.style.width = fullBookWidth + 'px';
+            physicalMenuContainer.style.height = bookHeight + 'px';
+
             physicalMenuContainer.classList.remove('hidden');
-            gsap.set(physicalMenuContainer, { opacity: 1, scale: 1 }); // Force GSAP to reveal the container
-            
-            menuBackdrop.classList.remove('hidden');
-            menuBackdrop.classList.remove('opacity-0');
+            gsap.set(physicalMenuContainer, { opacity: 1 });
             toggleBar.classList.remove('hidden');
-            
+
             gsap.set("#menu-left-page", { rotationY: 0 });
             gsap.set("#book-spine", { opacity: 1 });
             gsap.set("#tap-to-expand", { opacity: 1 });
-            
-            // Automatically launch the detailed modal
+
             openDetailedSchedule();
         }
 
@@ -788,6 +842,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
                        
+            //const TEST_DATE = "2026-03-08T12:00:00-06:00";
             const TEST_DATE = null;
             
             const realWorldInitTime = new Date().getTime();
@@ -798,8 +853,8 @@
                 return new Date().getTime() + timeOffset;
             }
 
-            const targetDate = new Date("2026-03-15T00:01:00-06:00").getTime();
-            const aprilDate = new Date("2026-04-01T00:00:00-06:00").getTime();
+            const targetDate = new Date("2026-03-09T00:01:00-06:00").getTime();
+            const aprilDate = new Date("2026-03-15T00:00:00-06:00").getTime();
             const now = getCurrentTime();
 
             if (now >= aprilDate) {
